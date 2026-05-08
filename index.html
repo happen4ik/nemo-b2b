@@ -130,7 +130,40 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
 .poa-doc .poa-sign-col{flex:1}
 .poa-doc .poa-sign-line{border-bottom:1px solid #444;margin-top:28px;margin-bottom:3px}
 .poa-doc .poa-sign-hint{font-size:9px;color:#777;text-align:center}
-/* ── Document upload zone ─────────────────────────────────── */
+/* ── GitHub History System ──────────────────────────────────── */
+.gh-btn{padding:10px 18px;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:Arial,sans-serif;display:inline-flex;align-items:center;gap:6px}
+.gh-btn-save{background:#2ea043;color:#fff}.gh-btn-save:hover{background:#238636}
+.gh-btn-hist{background:#fff;color:#222;border:1px solid #ccc}.gh-btn-hist:hover{background:#f5f5f5}
+.gh-btn-settings{background:none;border:none;font-size:20px;cursor:pointer;padding:4px 8px;border-radius:6px;color:#888}.gh-btn-settings:hover{background:#f0f0f0;color:#222}
+.gh-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:500;align-items:flex-start;justify-content:flex-end}
+.gh-overlay.show{display:flex}
+.gh-sidebar{background:#fff;width:420px;max-width:95vw;height:100vh;overflow-y:auto;box-shadow:-4px 0 24px rgba(0,0,0,0.18);display:flex;flex-direction:column}
+.gh-sidebar-head{padding:18px 20px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:10px;background:#f9f9f9;position:sticky;top:0;z-index:1}
+.gh-sidebar-head h2{font-size:16px;font-weight:700;color:#222;margin:0;flex:1}
+.gh-sidebar-body{padding:16px;flex:1}
+.gh-doc-card{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:all 0.15s;position:relative}
+.gh-doc-card:hover{border-color:#39B2D1;box-shadow:0 2px 12px rgba(57,178,209,0.15)}
+.gh-doc-card .card-title{font-size:14px;font-weight:600;color:#222;margin-bottom:4px}
+.gh-doc-card .card-meta{font-size:12px;color:#888}
+.gh-doc-card .card-actions{display:flex;gap:6px;margin-top:10px}
+.gh-doc-card .card-btn{padding:6px 12px;border-radius:6px;font-size:12px;border:none;cursor:pointer;font-family:Arial}
+.gh-doc-card .card-btn-open{background:#39B2D1;color:#fff}.gh-doc-card .card-btn-open:hover{background:#2a9ab8}
+.gh-doc-card .card-btn-del{background:#fff;color:#e24b4a;border:1px solid #e24b4a}.gh-doc-card .card-btn-del:hover{background:#fff5f5}
+.gh-empty{text-align:center;padding:40px 20px;color:#aaa;font-size:14px}
+.gh-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:600;align-items:center;justify-content:center}
+.gh-modal.show{display:flex}
+.gh-modal-box{background:#fff;border-radius:14px;width:460px;max-width:95vw;padding:0;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
+.gh-modal-head{padding:18px 22px;background:#f9f9f9;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between}
+.gh-modal-head h3{font-size:16px;font-weight:700;margin:0;color:#222}
+.gh-modal-body{padding:22px}
+.gh-modal-body label{display:block;font-size:13px;color:#666;margin-bottom:4px;margin-top:14px}
+.gh-modal-body label:first-child{margin-top:0}
+.gh-modal-body input{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:Arial;box-sizing:border-box}
+.gh-modal-body input:focus{outline:none;border-color:#39B2D1}
+.gh-modal-foot{padding:16px 22px;border-top:1px solid #eee;display:flex;gap:8px;justify-content:flex-end}
+.gh-status{font-size:12px;display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font-weight:600}
+.gh-status.ok{background:#d1f0dc;color:#1a7a4a}.gh-status.err{background:#fde8e8;color:#c0392b}.gh-status.loading{background:#fff3d4;color:#b87a00}
+.gh-tabs-settings{display:flex;justify-content:flex-end;align-items:center;padding:0 8px 0 0;background:#f5f5f5;border-bottom:1px solid #ddd}
 .doc-upload-zone{position:relative;border:2px dashed #c0dff0;border-radius:10px;padding:14px 16px;text-align:center;cursor:pointer;background:#f9feff;transition:all 0.2s;margin-bottom:14px}
 .doc-upload-zone:hover,.doc-upload-zone.drag-over{border-color:#39B2D1;background:#e8f7ff}
 .doc-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
@@ -211,10 +244,11 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
 </style>
 </head>
 <body>
-<div class="tabs-header">
+<div class="tabs-header" style="display:flex;align-items:center">
   <button onclick="showTopPanel(&#39;kp&#39;,this)" class="tab-btn">📄 Коммерческое предложение</button>
   <button class="tab-btn active" onclick="showTopPanel(&#39;sc&#39;,this)">💰 Счёт на оплату</button>
   <button class="tab-btn" onclick="showTopPanel(&#39;poa&#39;,this)">📋 Доверенность (Ф-3-2)</button>
+  <button class="gh-btn-settings" onclick="showGhSettings()" title="Настройки GitHub синхронизации" style="margin-left:auto;margin-right:8px" id="gh-status-btn">☁️</button>
 </div>
 <div id="panel-kp" class="sub-panel" style="display: none;">
 <div class="wrap">
@@ -324,6 +358,8 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
     <button class="btn-primary" onclick="showPreview()">Предпросмотр и редактирование</button>
     <button class="btn-secondary" onclick="copyText()">Скопировать текст</button>
     <button class="btn-orange" onclick="showPreviewForPDF()">Скачать PDF</button>
+    <button class="gh-btn gh-btn-save" onclick="ghSaveDoc('kp')">☁️ Сохранить в облако</button>
+    <button class="gh-btn gh-btn-hist" onclick="ghShowHistory('kp')">📋 История КП</button>
     <button onclick="kpReset()" style="padding:10px 20px;background:#e74c3c;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:Arial">🗑 Сбросить КП</button>
   </div>
 </div>
@@ -474,6 +510,8 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
     <button class="btn-primary" onclick="sc_showPreview()">Предпросмотр и редактирование</button>
     <button class="btn-secondary" onclick="sc_copyText()">Скопировать текст</button>
     <button class="btn-teal" onclick="sc_showPreviewForPDF()">Скачать PDF</button>
+    <button class="gh-btn gh-btn-save" onclick="ghSaveDoc('sc')">☁️ Сохранить в облако</button>
+    <button class="gh-btn gh-btn-hist" onclick="ghShowHistory('sc')">📋 История счетов</button>
     <button onclick="scReset()" style="padding:10px 20px;background:#e74c3c;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:Arial">🗑 Сбросить счёт</button>
   </div>
 </div>
@@ -693,6 +731,8 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
   <div class="actions">
     <button class="btn-primary" onclick="poa_showPreview()">Предпросмотр и редактирование</button>
     <button class="btn-teal" onclick="poa_showPreviewForPDF()">Скачать PDF</button>
+    <button class="gh-btn gh-btn-save" onclick="ghSaveDoc('poa')">☁️ Сохранить в облако</button>
+    <button class="gh-btn gh-btn-hist" onclick="ghShowHistory('poa')">📋 История доверенностей</button>
     <button onclick="poaReset()" style="padding:10px 20px;background:#e74c3c;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:Arial">🗑 Сбросить</button>
   </div>
 </div>
@@ -2466,6 +2506,366 @@ if (!poa_items.length) poa_addItem();
 // Инициализация Dadata — автозаполнение
 initDocUploadZones();
 initIdUploadZone();
+
+// ═══════════════════════════════════════════════════════════════
+// GITHUB CLOUD HISTORY — синхронизация и история документов
+// ═══════════════════════════════════════════════════════════════
+
+var GH_API  = 'https://api.github.com';
+var GH_PATH = 'cloud-data';
+var _ghCurrentType = null;
+var _ghShaCache = {};
+
+// ── Конфиг из localStorage ────────────────────────────────────
+function ghCfg() {
+  return {
+    token: localStorage.getItem('gh_token') || '',
+    owner: localStorage.getItem('gh_owner') || 'happen4ik',
+    repo:  localStorage.getItem('gh_repo')  || 'nemo-b2b'
+  };
+}
+
+// ── Базовые операции с GitHub API ────────────────────────────
+function ghFetch(path, opts) {
+  var c = ghCfg();
+  if (!c.token) return Promise.reject(new Error('Токен не настроен'));
+  var url = GH_API + '/repos/' + c.owner + '/' + c.repo + '/contents/' + path;
+  var headers = { 'Authorization': 'token ' + c.token, 'Accept': 'application/vnd.github.v3+json' };
+  return fetch(url, Object.assign({ headers: headers }, opts));
+}
+
+function ghGetFile(path) {
+  return ghFetch(path).then(function(r) {
+    if (r.status === 404) return null;
+    if (!r.ok) throw new Error('GitHub: ' + r.status);
+    return r.json();
+  });
+}
+
+function ghPutFile(path, data, message, sha) {
+  var body = { message: message, content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2)))) };
+  if (sha) body.sha = sha;
+  return ghFetch(path, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+    .then(function(r) { if (!r.ok) throw new Error('GitHub save: ' + r.status); return r.json(); });
+}
+
+function ghDeleteFile(path, message, sha) {
+  return ghFetch(path, { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: message, sha: sha }) })
+    .then(function(r) { if (!r.ok) throw new Error('GitHub delete: ' + r.status); return r.json(); });
+}
+
+// ── Загрузить историю ─────────────────────────────────────────
+function ghLoadHistory(type) {
+  var path = GH_PATH + '/' + type + '.json';
+  return ghGetFile(path).then(function(file) {
+    if (!file) return { docs: [], sha: null };
+    _ghShaCache[type] = file.sha;
+    try {
+      var content = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\s/g,'')))));
+      return { docs: content.docs || [], sha: file.sha };
+    } catch(e) { return { docs: [], sha: file.sha }; }
+  });
+}
+
+// ── Сохранить документ ───────────────────────────────────────
+function ghSaveDoc(type) {
+  var c = ghCfg();
+  if (!c.token) { showGhSettings(); showBinToast('⚙️ Сначала настройте GitHub токен', 'warn'); return; }
+
+  var data = ghCollectData(type);
+  var title = ghMakeTitle(type, data);
+
+  showBinToast('☁️ Сохраняю в облако...', 'warn');
+
+  ghLoadHistory(type).then(function(history) {
+    var now = new Date().toISOString();
+    // Обновляем если уже есть _histId (редактирование)
+    var histId = data._histId;
+    var existing = histId ? history.docs.find(function(d) { return d.id === histId; }) : null;
+
+    if (existing) {
+      existing.title = title;
+      existing.updated_at = now;
+      existing.data = data;
+    } else {
+      var newDoc = { id: type + '-' + Date.now(), title: title, created_at: now, updated_at: now, data: data };
+      history.docs.unshift(newDoc);
+      histId = newDoc.id;
+    }
+
+    var path = GH_PATH + '/' + type + '.json';
+    return ghPutFile(path, { docs: history.docs }, '💾 ' + title, history.sha).then(function(res) {
+      if (res.content) _ghShaCache[type] = res.content.sha;
+      // Сохраняем histId в черновик
+      data._histId = histId;
+      if (type === 'kp')  { kp_items; localStorage.setItem('nemo_kp_draft', JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('nemo_kp_draft')||'{}'), {_histId: histId}))); }
+      if (type === 'sc')  { localStorage.setItem('nemo_inv_draft', JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('nemo_inv_draft')||'{}'), {_histId: histId}))); }
+      if (type === 'poa') { localStorage.setItem('nemo_poa_draft', JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('nemo_poa_draft')||'{}'), {_histId: histId}))); }
+      showBinToast('✅ «' + title + '» сохранён в облако', 'success');
+    });
+  }).catch(function(err) {
+    showBinToast('❌ Ошибка сохранения: ' + (err.message || err), 'warn');
+  });
+}
+
+// ── Показать историю ─────────────────────────────────────────
+function ghShowHistory(type) {
+  var c = ghCfg();
+  if (!c.token) { showGhSettings(); showBinToast('⚙️ Сначала настройте GitHub токен', 'warn'); return; }
+
+  _ghCurrentType = type;
+  var icons = { kp: '📄', sc: '💰', poa: '📋' };
+  var titles = { kp: 'История КП', sc: 'История счетов', poa: 'История доверенностей' };
+  document.getElementById('gh-hist-icon').textContent = icons[type] || '📋';
+  document.getElementById('gh-hist-title').textContent = titles[type] || 'История';
+  document.getElementById('gh-hist-body').innerHTML = '<div class="gh-empty">⏳ Загружаю из облака...</div>';
+  document.getElementById('gh-history-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+
+  ghLoadHistory(type).then(function(history) {
+    ghRenderHistory(history.docs, type);
+  }).catch(function(err) {
+    document.getElementById('gh-hist-body').innerHTML = '<div class="gh-empty">❌ ' + (err.message || err) + '</div>';
+  });
+}
+
+function ghCloseHistory() {
+  document.getElementById('gh-history-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+  _ghCurrentType = null;
+}
+
+function ghRenderHistory(docs, type) {
+  var body = document.getElementById('gh-hist-body');
+  if (!docs || !docs.length) {
+    body.innerHTML = '<div class="gh-empty">📭 История пуста<br><small>Нажмите «☁️ Сохранить в облако» чтобы добавить первый документ</small></div>';
+    return;
+  }
+
+  body.innerHTML = '';
+  docs.forEach(function(doc) {
+    var created = new Date(doc.created_at).toLocaleDateString('ru-RU', { day:'2-digit', month:'2-digit', year:'numeric' });
+    var updated = new Date(doc.updated_at).toLocaleString('ru-RU', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    var isUpdated = doc.created_at !== doc.updated_at;
+
+    var card = document.createElement('div');
+    card.className = 'gh-doc-card';
+    card.innerHTML =
+      '<div class="card-title">' + escHtml(doc.title) + '</div>' +
+      '<div class="card-meta">Создан: ' + created + (isUpdated ? ' · Изменён: ' + updated : '') + '</div>' +
+      '<div class="card-actions">' +
+        '<button class="card-btn card-btn-open" onclick="ghLoadDoc(\'' + doc.id + '\',\'' + type + '\')">📂 Открыть</button>' +
+        '<button class="card-btn card-btn-del" onclick="ghConfirmDelete(\'' + doc.id + '\',\'' + type + '\',\'' + escHtml(doc.title).replace(/'/g,"&#39;") + '\')">🗑 Удалить</button>' +
+      '</div>';
+    body.appendChild(card);
+  });
+}
+
+// ── Открыть документ из истории ──────────────────────────────
+function ghLoadDoc(id, type) {
+  ghLoadHistory(type).then(function(history) {
+    var doc = history.docs.find(function(d) { return d.id === id; });
+    if (!doc) { showBinToast('❌ Документ не найден', 'warn'); return; }
+
+    ghCloseHistory();
+    ghRestoreData(doc.data, type);
+    // Переключаем на нужную вкладку
+    var tabMap = { kp: 0, sc: 1, poa: 2 };
+    var tabs = document.querySelectorAll('.tab-btn');
+    var panels = document.querySelectorAll('.sub-panel');
+    if (tabs[tabMap[type]]) {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      panels.forEach(function(p) { p.style.display = 'none'; });
+      tabs[tabMap[type]].classList.add('active');
+      panels[tabMap[type]].style.display = 'block';
+    }
+    showBinToast('✅ «' + doc.title + '» загружен', 'success');
+  }).catch(function(err) {
+    showBinToast('❌ ' + (err.message || err), 'warn');
+  });
+}
+
+// ── Удалить документ ─────────────────────────────────────────
+function ghConfirmDelete(id, type, title) {
+  if (!confirm('Удалить «' + title + '»?\nДействие необратимо.')) return;
+  showBinToast('🗑 Удаляю...', 'warn');
+  ghLoadHistory(type).then(function(history) {
+    history.docs = history.docs.filter(function(d) { return d.id !== id; });
+    var path = GH_PATH + '/' + type + '.json';
+    return ghPutFile(path, { docs: history.docs }, '🗑 Удалить ' + title, history.sha);
+  }).then(function() {
+    showBinToast('✅ Документ удалён', 'success');
+    ghShowHistory(type);
+  }).catch(function(err) {
+    showBinToast('❌ ' + (err.message || err), 'warn');
+  });
+}
+
+// ── Собрать текущие данные формы ─────────────────────────────
+function ghCollectData(type) {
+  function val(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+  if (type === 'kp') {
+    return {
+      _histId: (JSON.parse(localStorage.getItem('nemo_kp_draft')||'{}'))._histId || null,
+      client_company: val('kp__client_company'), client_bin: val('kp__client_bin'),
+      kp_number: val('kp__kp_number'), kp_date: val('kp__kp_date'),
+      kp_valid_days: val('kp__kp_valid_days'), manager_name: val('kp__manager_name'),
+      manager_phone: val('kp__manager_phone'), payment_terms: val('kp__payment_terms'),
+      delivery_terms: val('kp__delivery_terms'), extra_notes: val('kp__extra_notes'),
+      items: (typeof kp_items !== 'undefined' ? kp_items : [])
+    };
+  }
+  if (type === 'sc') {
+    return {
+      _histId: (JSON.parse(localStorage.getItem('nemo_inv_draft')||'{}'))._histId || null,
+      client_company: val('sc__client_company'), client_bin: val('sc__client_bin'),
+      client_address: val('sc__client_address'), client_contract: val('sc__client_contract'),
+      inv_number: val('sc__inv_number'), inv_date: val('sc__inv_date'),
+      items: (typeof sc_items !== 'undefined' ? sc_items : [])
+    };
+  }
+  if (type === 'poa') {
+    return poa_getData ? Object.assign(poa_getData(), {
+      _histId: (JSON.parse(localStorage.getItem('nemo_poa_draft')||'{}'))._histId || null
+    }) : {};
+  }
+  return {};
+}
+
+// ── Восстановить данные в форму ───────────────────────────────
+function ghRestoreData(data, type) {
+  function sv(id, val) {
+    if (val == null) return;
+    var el = document.getElementById(id);
+    if (el) { el.value = val; el.dispatchEvent(new Event('input')); el.dispatchEvent(new Event('change')); }
+  }
+  if (type === 'kp') {
+    sv('kp__client_company', data.client_company); sv('kp__client_bin', data.client_bin);
+    sv('kp__kp_number', data.kp_number); sv('kp__kp_date', data.kp_date);
+    sv('kp__kp_valid_days', data.kp_valid_days); sv('kp__payment_terms', data.payment_terms);
+    sv('kp__delivery_terms', data.delivery_terms); sv('kp__extra_notes', data.extra_notes);
+    if (data.items && data.items.length) {
+      kp_items = data.items.map(function(it,i){ return Object.assign({id:i+1},it); });
+      kp_itemId = kp_items.length; renderItems();
+    }
+    if (data._histId) localStorage.setItem('nemo_kp_draft', JSON.stringify(Object.assign(data)));
+    else kpSave();
+  }
+  if (type === 'sc') {
+    sv('sc__client_company', data.client_company); sv('sc__client_bin', data.client_bin);
+    sv('sc__client_address', data.client_address); sv('sc__client_contract', data.client_contract);
+    sv('sc__inv_number', data.inv_number); sv('sc__inv_date', data.inv_date);
+    if (data.items && data.items.length) {
+      sc_items = data.items.map(function(it,i){ return Object.assign({id:i+1},it); });
+      sc_itemId = sc_items.length; sc_renderItems();
+    }
+    scSave();
+  }
+  if (type === 'poa') {
+    var fields = ['org_name','org_bin','org_address','series','number','issue_date','valid_until',
+      'basis','person_fio','person_position','pass_number','pass_issued_by','pass_issued_date',
+      'head_fio','chief_accountant'];
+    fields.forEach(function(f) { sv('poa__' + f, data[f]); });
+    if (data.items && data.items.length) {
+      poa_items = data.items.map(function(it,i){ return Object.assign({id:i+1},it); });
+      poa_itemId = poa_items.length; poa_renderItems();
+    }
+    poaSave();
+  }
+}
+
+// ── Заголовок документа ──────────────────────────────────────
+function ghMakeTitle(type, data) {
+  if (type === 'kp') return 'КП №' + (data.kp_number||'—') + (data.client_company ? ' — ' + data.client_company : '');
+  if (type === 'sc') return 'Счёт №' + (data.inv_number||'—') + (data.client_company ? ' — ' + data.client_company : '');
+  if (type === 'poa') return 'Доверенность ' + ((data.series||'') + (data.number||'—')) + (data.org_name ? ' — ' + data.org_name : '');
+  return 'Документ';
+}
+
+// ── Settings UI ───────────────────────────────────────────────
+function showGhSettings() {
+  var c = ghCfg();
+  document.getElementById('gh-token-input').value = c.token;
+  document.getElementById('gh-owner-input').value = c.owner;
+  document.getElementById('gh-repo-input').value  = c.repo;
+  document.getElementById('gh-settings-modal').classList.add('show');
+  document.getElementById('gh-test-status').textContent = '';
+}
+function closeGhSettings() {
+  document.getElementById('gh-settings-modal').classList.remove('show');
+}
+function ghSaveSettings() {
+  localStorage.setItem('gh_token', document.getElementById('gh-token-input').value.trim());
+  localStorage.setItem('gh_owner', document.getElementById('gh-owner-input').value.trim() || 'happen4ik');
+  localStorage.setItem('gh_repo',  document.getElementById('gh-repo-input').value.trim()  || 'nemo-b2b');
+  ghUpdateStatusBtn();
+  closeGhSettings();
+  showBinToast('✅ Настройки сохранены', 'success');
+}
+function ghTestConnection() {
+  var status = document.getElementById('gh-test-status');
+  status.innerHTML = '<span style="color:#888">⏳ Проверяю...</span>';
+  localStorage.setItem('gh_token', document.getElementById('gh-token-input').value.trim());
+  localStorage.setItem('gh_owner', document.getElementById('gh-owner-input').value.trim() || 'happen4ik');
+  localStorage.setItem('gh_repo',  document.getElementById('gh-repo-input').value.trim()  || 'nemo-b2b');
+  var c = ghCfg();
+  fetch(GH_API + '/repos/' + c.owner + '/' + c.repo, {
+    headers: { 'Authorization': 'token ' + c.token, 'Accept': 'application/vnd.github.v3+json' }
+  }).then(function(r) {
+    if (r.ok) { status.innerHTML = '<span style="color:#1a7a4a">✅ Соединение работает!</span>'; ghUpdateStatusBtn(); }
+    else if (r.status === 401) status.innerHTML = '<span style="color:#c0392b">❌ Неверный токен</span>';
+    else if (r.status === 404) status.innerHTML = '<span style="color:#c0392b">❌ Репозиторий не найден</span>';
+    else status.innerHTML = '<span style="color:#c0392b">❌ Ошибка: ' + r.status + '</span>';
+  }).catch(function() { status.innerHTML = '<span style="color:#c0392b">❌ Нет соединения</span>'; });
+}
+function ghUpdateStatusBtn() {
+  var btn = document.getElementById('gh-status-btn');
+  if (!btn) return;
+  btn.textContent = ghCfg().token ? '☁️✅' : '☁️';
+  btn.title = ghCfg().token ? 'GitHub подключён — нажмите для настроек' : 'Настроить GitHub синхронизацию';
+}
+
+// Инициализация
+ghUpdateStatusBtn();
 </script>
+
+<!-- ── GitHub Settings Modal ────────────────────────────────── -->
+<div class="gh-modal" id="gh-settings-modal" onclick="if(event.target===this)closeGhSettings()">
+  <div class="gh-modal-box">
+    <div class="gh-modal-head">
+      <h3>☁️ Настройки GitHub синхронизации</h3>
+      <button onclick="closeGhSettings()" style="background:none;border:none;font-size:22px;cursor:pointer;color:#aaa">×</button>
+    </div>
+    <div class="gh-modal-body">
+      <div style="background:#fff3d4;border:1px solid #f5a623;border-radius:8px;padding:12px;font-size:12px;color:#7a4a00;margin-bottom:14px">⚠️ Токен хранится только в вашем браузере. Не публикуйте его в открытом доступе.</div>
+      <label>GitHub Personal Access Token</label>
+      <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxx">
+      <label>Владелец репозитория (логин GitHub)</label>
+      <input type="text" id="gh-owner-input" placeholder="happen4ik">
+      <label>Название репозитория</label>
+      <input type="text" id="gh-repo-input" placeholder="nemo-b2b">
+      <div style="margin-top:12px;font-size:12px;color:#999">Данные сохраняются в папку <b>cloud-data/</b> вашего репозитория</div>
+    </div>
+    <div class="gh-modal-foot">
+      <span id="gh-test-status" style="font-size:13px;margin-right:auto"></span>
+      <button onclick="ghTestConnection()" style="padding:9px 16px;background:#f5f5f5;border:1px solid #ccc;border-radius:8px;font-size:13px;cursor:pointer;font-family:Arial">Проверить</button>
+      <button onclick="ghSaveSettings()" style="padding:9px 16px;background:#2ea043;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:Arial">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── History Sidebar ──────────────────────────────────────── -->
+<div class="gh-overlay" id="gh-history-overlay" onclick="if(event.target===this)ghCloseHistory()">
+  <div class="gh-sidebar">
+    <div class="gh-sidebar-head">
+      <span id="gh-hist-icon" style="font-size:20px">📋</span>
+      <h2 id="gh-hist-title">История</h2>
+      <button onclick="ghCloseHistory()" style="background:none;border:none;font-size:22px;cursor:pointer;color:#aaa;line-height:1">×</button>
+    </div>
+    <div class="gh-sidebar-body" id="gh-hist-body">
+      <div class="gh-empty">⏳ Загрузка...</div>
+    </div>
+  </div>
+</div>
 
 </body></html>
