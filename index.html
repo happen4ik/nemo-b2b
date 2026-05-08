@@ -1776,7 +1776,7 @@ function kpRestore(){
     var raw=localStorage.getItem('nemo_kp_draft');
     if(!raw)return;
     var d=JSON.parse(raw);
-    var fields=['client_company','client_bin','kp_date','kp_valid_days',
+    var fields=['client_company','client_bin','kp_valid_days',
                 'manager_name','manager_phone','payment_terms','delivery_terms','extra_notes'];
     fields.forEach(function(f){
       var el=document.getElementById('kp__'+f);
@@ -1828,7 +1828,7 @@ function scRestore(){
     var raw=localStorage.getItem('nemo_sc_draft');
     if(!raw)return;
     var d=JSON.parse(raw);
-    var fields=['client_company','client_bin','client_address','client_contract','inv_date'];
+    var fields=['client_company','client_bin','client_address','client_contract'];
     fields.forEach(function(f){
       var el=document.getElementById('sc__'+f);
       if(el&&d[f]!==undefined)el.value=d[f];
@@ -2856,7 +2856,7 @@ function poaRestore() {
     if (!raw) return;
     var d = JSON.parse(raw);
     var fields = ['org_name','org_bin','org_address',
-      'series','number','issue_date','valid_until','basis',
+      'series','number','basis',
       'person_fio','person_position','pass_number','pass_issued_by','pass_issued_date',
       'head_fio','chief_accountant'];
     fields.forEach(function(f){
@@ -2911,6 +2911,26 @@ if (!poa_items.length) poa_addItem();
 // Инициализация Dadata — автозаполнение
 initDocUploadZones();
 initIdUploadZone();
+
+// ── Актуальная дата на всех вкладках ─────────────────────────
+function setTodayDates() {
+  var today = new Date().toISOString().split('T')[0];
+  var validUntil = new Date();
+  validUntil.setDate(validUntil.getDate() + 10);
+  var validUntilStr = validUntil.toISOString().split('T')[0];
+
+  var fields = {
+    'kp__kp_date':       today,
+    'sc__inv_date':      today,
+    'poa__issue_date':   today,
+    'poa__valid_until':  validUntilStr
+  };
+  Object.keys(fields).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.value = fields[id];
+  });
+}
+setTodayDates();
 
 // ═══════════════════════════════════════════════════════════════
 // GITHUB CLOUD HISTORY — синхронизация и история документов
