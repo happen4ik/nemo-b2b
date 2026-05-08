@@ -84,7 +84,268 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
 @media(max-width:600px){.row,.row.three{grid-template-columns:1fr}.actions{flex-direction:column}.preview-content{padding:20px 16px}}
 
 /* ══════════════════════════════════════════════════════════════
-   МОБИЛЬНАЯ АДАПТАЦИЯ
+   ТЁМНАЯ ТЕМА
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="dark"]{color-scheme:dark}
+[data-theme="dark"] html,
+[data-theme="dark"],
+[data-theme="dark"] body{background:#0d0d1a}
+
+/* Панели */
+[data-theme="dark"] #panel-kp,
+[data-theme="dark"] #panel-sc,
+[data-theme="dark"] #panel-poa{background:#0d0d1a;color:#dde1f0}
+[data-theme="dark"] #panel-kp .wrap,
+[data-theme="dark"] #panel-sc .wrap,
+[data-theme="dark"] #panel-poa .wrap{background:#0d0d1a}
+
+/* Заголовки */
+[data-theme="dark"] #panel-kp h1,
+[data-theme="dark"] #panel-sc h1,
+[data-theme="dark"] #panel-poa h1{color:#dde1f0}
+
+/* Секции */
+[data-theme="dark"] #panel-kp .section,
+[data-theme="dark"] #panel-sc .section,
+[data-theme="dark"] #panel-poa .section{background:#171727;border-color:#2a2a40;color:#dde1f0}
+[data-theme="dark"] #panel-kp .section-title,
+[data-theme="dark"] #panel-sc .section-title,
+[data-theme="dark"] #panel-poa .section-title{color:#7b82a8}
+
+/* Поля ввода */
+[data-theme="dark"] #panel-kp input,
+[data-theme="dark"] #panel-kp select,
+[data-theme="dark"] #panel-kp textarea,
+[data-theme="dark"] #panel-sc input,
+[data-theme="dark"] #panel-sc select,
+[data-theme="dark"] #panel-sc textarea,
+[data-theme="dark"] #panel-poa input,
+[data-theme="dark"] #panel-poa select,
+[data-theme="dark"] #panel-poa textarea{background:#1f1f31;border-color:#3a3a55;color:#dde1f0}
+[data-theme="dark"] #panel-kp input:focus,
+[data-theme="dark"] #panel-kp select:focus,
+[data-theme="dark"] #panel-kp textarea:focus,
+[data-theme="dark"] #panel-sc input:focus,
+[data-theme="dark"] #panel-sc select:focus,
+[data-theme="dark"] #panel-sc textarea:focus,
+[data-theme="dark"] #panel-poa input:focus,
+[data-theme="dark"] #panel-poa select:focus,
+[data-theme="dark"] #panel-poa textarea:focus{border-color:#39B2D1}
+
+/* Labels */
+[data-theme="dark"] #panel-kp label,
+[data-theme="dark"] #panel-sc label,
+[data-theme="dark"] #panel-poa label{color:#8890b0}
+
+/* Таблицы позиций */
+[data-theme="dark"] #panel-kp .items-table th,
+[data-theme="dark"] #panel-sc .items-table th,
+[data-theme="dark"] #panel-poa .items-table th{color:#7b82a8;border-color:#2a2a40}
+[data-theme="dark"] #panel-kp .items-table td,
+[data-theme="dark"] #panel-sc .items-table td,
+[data-theme="dark"] #panel-poa .items-table td{color:#dde1f0}
+[data-theme="dark"] .items-table tr:nth-child(even){background:#1a1a2a}
+
+/* Кнопки добавить */
+[data-theme="dark"] #panel-kp .add-btn,
+[data-theme="dark"] #panel-sc .add-btn,
+[data-theme="dark"] #panel-poa .add-btn{border-color:#39B2D1;color:#39B2D1;background:transparent}
+[data-theme="dark"] #panel-kp .add-btn:hover,
+[data-theme="dark"] #panel-sc .add-btn:hover,
+[data-theme="dark"] #panel-poa .add-btn:hover{background:#1a2a35}
+
+/* Кнопка предпросмотр */
+[data-theme="dark"] .btn-primary{background:#2a2a45;color:#dde1f0;border:1px solid #3a3a60}
+[data-theme="dark"] .btn-primary:hover{background:#3a3a58}
+[data-theme="dark"] .btn-secondary{background:#1f1f31;color:#dde1f0;border-color:#3a3a55}
+[data-theme="dark"] .btn-secondary:hover{background:#2a2a40}
+[data-theme="dark"] .btn-orange{background:#c9510c;color:#fff}
+
+/* История кнопка */
+[data-theme="dark"] .gh-btn-hist{background:#1f1f31;color:#dde1f0;border-color:#3a3a55}
+[data-theme="dark"] .gh-btn-hist:hover{background:#2a2a40}
+
+/* Панель предпросмотра — оставляем светлой (имитация бумаги) */
+[data-theme="dark"] #panel-kp .preview-overlay,
+[data-theme="dark"] #panel-sc .preview-overlay,
+[data-theme="dark"] #panel-poa .preview-overlay{background:rgba(0,0,0,0.75)}
+[data-theme="dark"] #panel-kp .preview-actions,
+[data-theme="dark"] #panel-sc .preview-actions,
+[data-theme="dark"] #panel-poa .preview-actions{background:#1e1e30;border-color:#2a2a40}
+[data-theme="dark"] #panel-kp .preview-actions button,
+[data-theme="dark"] #panel-sc .preview-actions button,
+[data-theme="dark"] #panel-poa .preview-actions button{background:#2a2a45;color:#dde1f0;border-color:#3a3a60}
+[data-theme="dark"] #panel-kp .preview-box,
+[data-theme="dark"] #panel-sc .preview-box,
+[data-theme="dark"] #panel-poa .preview-box{background:#1e1e30}
+/* Сам документ в превью — белый как бумага */
+[data-theme="dark"] #panel-kp .preview-content,
+[data-theme="dark"] #panel-sc .preview-content,
+[data-theme="dark"] #panel-poa .preview-content{background:#fff;color:#222}
+
+/* Загрузка документа */
+[data-theme="dark"] .doc-upload-zone{background:#171727;border-color:#2e4055}
+[data-theme="dark"] .doc-upload-zone:hover,
+[data-theme="dark"] .doc-upload-zone.drag-over{background:#1a2a38;border-color:#39B2D1}
+[data-theme="dark"] .doc-upload-zone .duz-hint{color:#7b82a8}
+
+/* Поставщик-блок в доверенности */
+[data-theme="dark"] #panel-poa .section[style*="border-left:4px solid #39B2D1"]{background:#111a22;border-color:#39B2D1!important}
+[data-theme="dark"] #panel-poa .section[style*="border-left"] .section-title{color:#39B2D1}
+[data-theme="dark"] #panel-poa .section[style*="border-left"] div>div>div{color:#bcc5e0}
+
+/* История сайдбар */
+[data-theme="dark"] .gh-sidebar{background:#171727}
+[data-theme="dark"] .gh-sidebar-head{background:#1e1e30;border-color:#2a2a40;color:#dde1f0}
+[data-theme="dark"] .gh-sidebar-head h2{color:#dde1f0}
+[data-theme="dark"] .gh-doc-card{background:#1f1f31;border-color:#2a2a40;color:#dde1f0}
+[data-theme="dark"] .gh-doc-card:hover{border-color:#39B2D1;background:#1a2535}
+[data-theme="dark"] .gh-doc-card .card-title{color:#dde1f0}
+[data-theme="dark"] .gh-doc-card .card-meta{color:#7b82a8}
+[data-theme="dark"] .gh-doc-card .card-btn-open{background:#39B2D1;color:#fff}
+[data-theme="dark"] .gh-doc-card .card-btn-del{background:transparent;color:#e24b4a;border-color:#e24b4a}
+[data-theme="dark"] .gh-empty{color:#7b82a8}
+[data-theme="dark"] .gh-sidebar-body{background:#171727}
+
+/* GitHub настройки модаль */
+[data-theme="dark"] .gh-modal-box{background:#171727}
+[data-theme="dark"] .gh-modal-head{background:#1e1e30;border-color:#2a2a40}
+[data-theme="dark"] .gh-modal-head h3{color:#dde1f0}
+[data-theme="dark"] .gh-modal-body{background:#171727;color:#dde1f0}
+[data-theme="dark"] .gh-modal-body label{color:#8890b0}
+[data-theme="dark"] .gh-modal-body input{background:#1f1f31;border-color:#3a3a55;color:#dde1f0}
+[data-theme="dark"] .gh-modal-foot{background:#171727;border-color:#2a2a40}
+
+/* Поставщик фиксированные данные */
+[data-theme="dark"] #panel-poa [style*="font-weight:600;color:#222"]{color:#dde1f0!important}
+[data-theme="dark"] #panel-poa [style*="color:#999"]{color:#7b82a8!important}
+
+/* Удостоверение зона */
+[data-theme="dark"] #poa__id-zone{background:#14202d!important;border-color:#2e4a6a!important}
+
+/* Предупреждение GitHub */
+[data-theme="dark"] .gh-modal-body [style*="background:#fff3d4"]{background:#2a2510!important;border-color:#5a4a10!important;color:#e0cc80!important}
+
+/* Скроллбар */
+[data-theme="dark"] .sub-panel::-webkit-scrollbar{width:6px}
+[data-theme="dark"] .sub-panel::-webkit-scrollbar-track{background:#171727}
+[data-theme="dark"] .sub-panel::-webkit-scrollbar-thumb{background:#3a3a55;border-radius:3px}
+
+/* Плашка с info текстом в ДОВ (фиксированные данные Nemo.kz) */
+[data-theme="dark"] #panel-poa [style*="color:#222;margin-top:2px"]{color:#dde1f0!important}
+
+/* ── Переход цвета ── */
+*, *::before, *::after{transition:background-color .2s ease, border-color .2s ease, color .15s ease}
+
+/* ══ ТЁМНАЯ ТЕМА — ПОЛНЫЙ НАБОР ПЕРЕОПРЕДЕЛЕНИЙ ══ */
+
+/* btn-secondary во всех панелях */
+[data-theme="dark"] .btn-secondary,
+[data-theme="dark"] #panel-kp .btn-secondary,
+[data-theme="dark"] #panel-sc .btn-secondary,
+[data-theme="dark"] #panel-poa .btn-secondary{background:#252535!important;color:#dde1f0!important;border-color:#3a3a55!important}
+
+/* Кнопки «Найти по БИН» и «Проверить» — инлайн background:#f5f5f5 */
+[data-theme="dark"] button[style*="background:#f5f5f5"],
+[data-theme="dark"] button[style*="background: #f5f5f5"]{background:#252535!important;color:#b0b8d8!important;border-color:#3a3a55!important}
+
+/* Readonly поля — инлайн background:#f0f0f0 */
+[data-theme="dark"] input[style*="background:#f0f0f0"],
+[data-theme="dark"] input[style*="background: #f0f0f0"]{background:#1a1a2a!important;color:#7b82a8!important;border-color:#2a2a40!important}
+
+/* Кнопка «Сбросить счётчик» красная — оставляем как есть */
+
+/* Подсказка редактирования в KP превью (жёлтый фон) */
+[data-theme="dark"] div[style*="background:#fff8e6"],
+[data-theme="dark"] div[style*="background: #fff8e6"]{background:#2a2010!important;border-color:#4a3a10!important;color:#c8a840!important}
+
+/* Подсказка редактирования в SC/POA превью (голубой фон) */
+[data-theme="dark"] div[style*="background:#f0fbff"],
+[data-theme="dark"] div[style*="background: #f0fbff"]{background:#0d1e2a!important;border-color:#1a3a4a!important;color:#5ab8d8!important}
+[data-theme="dark"] div[style*="color:#2a9ab8"][style*="background:#f0fbff"]{background:#0d1e2a!important;color:#5ab8d8!important;border-color:#1a3a4a!important}
+
+/* Remove кнопка ховер */
+[data-theme="dark"] #panel-kp .remove-btn:hover,
+[data-theme="dark"] #panel-sc .remove-btn:hover,
+[data-theme="dark"] #panel-poa .remove-btn:hover{background:#3a1a1a!important}
+
+/* Карточки истории — del кнопка */
+[data-theme="dark"] .gh-doc-card .card-btn-del{background:#1f1528!important}
+
+/* GitHub кнопка «Проверить» — инлайн */
+[data-theme="dark"] .gh-modal-foot button[style*="background:#f5f5f5"]{background:#252535!important;color:#b0b8d8!important;border-color:#3a3a55!important}
+
+/* Зоны загрузки в состояниях */
+[data-theme="dark"] .doc-upload-zone.processing{background:#1e1a0d!important;border-color:#5a4a10!important}
+[data-theme="dark"] .doc-upload-zone.success{background:#0d1e14!important;border-color:#1a4a28!important}
+[data-theme="dark"] .doc-upload-zone.error{background:#1e0d0d!important;border-color:#4a1a1a!important}
+
+/* Удостоверение зона (инлайн background:#f5fbff) */
+[data-theme="dark"] #poa__id-zone[style*="background:#f5fbff"],
+[data-theme="dark"] #poa__id-zone{background:#0d1e2a!important;border-color:#1a3a55!important}
+
+/* Итоговая строка таблицы КП */
+[data-theme="dark"] .kp-total-row td,
+[data-theme="dark"] tr[style*="background:#fff3cc"],
+[data-theme="dark"] .kp-total-row{background:#1e1a0a!important}
+
+/* КП edit hint */
+[data-theme="dark"] .edit-hint{background:#1e1a0a!important;border-color:#4a3a10!important;color:#c8a840!important}
+
+/* Поставщик Nemo блок в доверенности — инлайн border-left */
+[data-theme="dark"] #panel-poa .section[style*="border-left:4px solid #39B2D1"]{background:#0d1a22!important}
+
+/* Фиксированные данные Nemo.kz — текст */
+[data-theme="dark"] #panel-poa [style*="font-weight:600;color:#222"]{color:#dde1f0!important}
+[data-theme="dark"] #panel-poa [style*="color:#999;font-size:12px"],
+[data-theme="dark"] #panel-poa [style*="color:#999"]{color:#6a7090!important}
+
+/* Счётчик номера КП/Счёт — readonly */
+[data-theme="dark"] #kp__kp_number[readonly],
+[data-theme="dark"] #sc__inv_number[readonly]{background:#1a1a2a!important;color:#7090a0!important}
+
+/* Скрытые поля настроек GitHub */
+[data-theme="dark"] .gh-modal-body input{background:#1f1f31!important;border-color:#3a3a55!important;color:#dde1f0!important}
+[data-theme="dark"] .gh-modal-body input::placeholder{color:#5a6080!important}
+
+/* Предупреждение токена */
+[data-theme="dark"] div[style*="background:#fff3d4"]{background:#2a2008!important;border-color:#4a3a08!important;color:#c8a030!important}
+
+/* Общие инлайн белые/серые кнопки которые не попали выше */
+[data-theme="dark"] button[style*="background:#fff"]{background:#252535!important;color:#dde1f0!important;border-color:#3a3a55!important}
+[data-theme="dark"] button[style*="background: #fff"]{background:#252535!important;color:#dde1f0!important;border-color:#3a3a55!important}
+[data-theme="dark"] button[style*="background:#f"]:not([style*="background:#e74c3c"]):not([style*="background:#2ea043"]):not([style*="background:#39B2D1"]){background:#252535!important;color:#dde1f0!important}
+
+/* Скроллбар для всего сайта */
+[data-theme="dark"] ::-webkit-scrollbar{width:6px;height:6px}
+[data-theme="dark"] ::-webkit-scrollbar-track{background:#171727}
+[data-theme="dark"] ::-webkit-scrollbar-thumb{background:#3a3a55;border-radius:3px}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background:#5050a0}
+
+/* ── Полоска под «Добавить позицию» — граница и цвет totals ── */
+[data-theme="dark"] #panel-kp .totals,
+[data-theme="dark"] #panel-sc .totals{border-top-color:#2a2a40!important}
+[data-theme="dark"] #panel-kp .totals p,
+[data-theme="dark"] #panel-sc .totals p{color:#7b82a8!important}
+[data-theme="dark"] #panel-kp .totals .grand,
+[data-theme="dark"] #panel-sc .totals .grand{color:#dde1f0!important}
+
+/* Границы th в таблицах позиций */
+[data-theme="dark"] #panel-kp .items-table th,
+[data-theme="dark"] #panel-sc .items-table th,
+[data-theme="dark"] #panel-poa .items-table th{border-bottom-color:#2a2a40!important;background:#1a1a2e!important}
+
+/* Все светлые границы #eee в секциях */
+[data-theme="dark"] #panel-kp .section,
+[data-theme="dark"] #panel-sc .section,
+[data-theme="dark"] #panel-poa .section{border-color:#2a2a40!important}
+
+/* Строки таблиц */
+[data-theme="dark"] #panel-kp .items-table td,
+[data-theme="dark"] #panel-sc .items-table td,
+[data-theme="dark"] #panel-poa .items-table td{border-color:#2a2a40}
+[data-theme="dark"] #panel-kp .items-table tr:hover td,
+[data-theme="dark"] #panel-sc .items-table tr:hover td{background:#1e1e30}
    ══════════════════════════════════════════════════════════════ */
 @media(max-width:768px){
 
@@ -345,7 +606,8 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
   <button onclick="showTopPanel(&#39;kp&#39;,this)" class="tab-btn">📄 Коммерческое предложение</button>
   <button class="tab-btn active" onclick="showTopPanel(&#39;sc&#39;,this)">💰 Счёт на оплату</button>
   <button class="tab-btn" onclick="showTopPanel(&#39;poa&#39;,this)">📋 Доверенность (Ф-3-2)</button>
-  <button class="gh-btn-settings" onclick="showGhSettings()" title="Настройки GitHub синхронизации" style="margin-left:auto;margin-right:8px" id="gh-status-btn">☁️</button>
+  <button class="gh-btn-settings" onclick="showGhSettings()" title="Настройки GitHub синхронизации" style="margin-left:auto;margin-right:4px" id="gh-status-btn">☁️</button>
+  <button onclick="toggleTheme()" id="theme-toggle-btn" title="Сменить тему" style="background:none;border:none;font-size:20px;cursor:pointer;padding:4px 10px;border-radius:6px;color:rgba(255,255,255,0.8);margin-right:6px">🌙</button>
 </div>
 <div id="panel-kp" class="sub-panel" style="display: none;">
 <div class="wrap">
@@ -2918,6 +3180,27 @@ function ghUpdateStatusBtn() {
   btn.textContent = ghCfg().token ? '☁️✅' : '☁️';
   btn.title = ghCfg().token ? 'GitHub подключён — нажмите для настроек' : 'Настроить GitHub синхронизацию';
 }
+
+// ── Тема: светлая / тёмная ────────────────────────────────────
+function toggleTheme() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  setTheme(isDark ? 'light' : 'dark');
+}
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('nemo_theme', theme);
+  var btn = document.getElementById('theme-toggle-btn');
+  if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+// Применить сохранённую тему при загрузке
+(function(){
+  var saved = localStorage.getItem('nemo_theme');
+  // Если не сохранено — проверяем системную тему
+  if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    saved = 'dark';
+  }
+  if (saved) setTheme(saved);
+})();
 
 // Инициализация
 ghUpdateStatusBtn();
