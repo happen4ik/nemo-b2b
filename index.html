@@ -358,7 +358,6 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
     <button class="btn-primary" onclick="showPreview()">Предпросмотр и редактирование</button>
     <button class="btn-secondary" onclick="copyText()">Скопировать текст</button>
     <button class="btn-orange" onclick="showPreviewForPDF()">Скачать PDF</button>
-    <button class="gh-btn gh-btn-save" onclick="ghSaveDoc('kp')">☁️ Сохранить в облако</button>
     <button class="gh-btn gh-btn-hist" onclick="ghShowHistory('kp')">📋 История КП</button>
     <button onclick="kpReset()" style="padding:10px 20px;background:#e74c3c;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:Arial">🗑 Сбросить КП</button>
   </div>
@@ -510,7 +509,6 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
     <button class="btn-primary" onclick="sc_showPreview()">Предпросмотр и редактирование</button>
     <button class="btn-secondary" onclick="sc_copyText()">Скопировать текст</button>
     <button class="btn-teal" onclick="sc_showPreviewForPDF()">Скачать PDF</button>
-    <button class="gh-btn gh-btn-save" onclick="ghSaveDoc('sc')">☁️ Сохранить в облако</button>
     <button class="gh-btn gh-btn-hist" onclick="ghShowHistory('sc')">📋 История счетов</button>
     <button onclick="scReset()" style="padding:10px 20px;background:#e74c3c;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:Arial">🗑 Сбросить счёт</button>
   </div>
@@ -731,7 +729,6 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
   <div class="actions">
     <button class="btn-primary" onclick="poa_showPreview()">Предпросмотр и редактирование</button>
     <button class="btn-teal" onclick="poa_showPreviewForPDF()">Скачать PDF</button>
-    <button class="gh-btn gh-btn-save" onclick="ghSaveDoc('poa')">☁️ Сохранить в облако</button>
     <button class="gh-btn gh-btn-hist" onclick="ghShowHistory('poa')">📋 История доверенностей</button>
     <button onclick="poaReset()" style="padding:10px 20px;background:#e74c3c;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:Arial">🗑 Сбросить</button>
   </div>
@@ -1653,6 +1650,7 @@ function getContent(){
 function showPreviewForPDF(){
   document.getElementById('kp__preview-content').innerHTML=buildHTML(getData());
   document.getElementById('kp__preview-overlay').classList.add('show');
+  ghAutoSave('kp'); // ☁️ авто-сохранение в облако
   setTimeout(downloadPDF,400);
 }
 
@@ -2046,6 +2044,7 @@ function sc_showPreview(){
 function sc_showPreviewForPDF(){
   document.getElementById('sc__preview-content').innerHTML=sc_buildHTML(sc_getData());
   document.getElementById('sc__preview-overlay').classList.add('show');
+  ghAutoSave('sc'); // ☁️ авто-сохранение в облако
   setTimeout(sc_downloadPDF,400);
 }
 function sc_closePreview(){document.getElementById('sc__preview-overlay').classList.remove('show')}
@@ -2380,6 +2379,7 @@ function poa_closePreview() {
 
 function poa_showPreviewForPDF() {
   poa_showPreview();
+  ghAutoSave('poa'); // ☁️ авто-сохранение в облако
   setTimeout(function(){poa_downloadPDF();}, 300);
 }
 
@@ -2530,14 +2530,17 @@ function ghFetch(path, opts) {
   var c = ghCfg();
   if (!c.token) return Promise.reject(new Error('Токен не настроен'));
   var url = GH_API + '/repos/' + c.owner + '/' + c.repo + '/contents/' + path;
-  var headers = { 'Authorization': 'token ' + c.token, 'Accept': 'application/vnd.github.v3+json' };
-  return fetch(url, Object.assign({ headers: headers }, opts));
+  // Правильное слияние заголовков — Authorization не теряется
+  var baseHeaders = { 'Authorization': 'token ' + c.token, 'Accept': 'application/vnd.github.v3+json' };
+  var extraHeaders = (opts && opts.headers) ? opts.headers : {};
+  var mergedOpts = Object.assign({}, opts, { headers: Object.assign({}, baseHeaders, extraHeaders) });
+  return fetch(url, mergedOpts);
 }
 
 function ghGetFile(path) {
   return ghFetch(path).then(function(r) {
     if (r.status === 404) return null;
-    if (!r.ok) throw new Error('GitHub: ' + r.status);
+    if (!r.ok) throw new Error('GitHub ' + r.status);
     return r.json();
   });
 }
@@ -2567,44 +2570,47 @@ function ghLoadHistory(type) {
   });
 }
 
-// ── Сохранить документ ───────────────────────────────────────
-function ghSaveDoc(type) {
-  var c = ghCfg();
-  if (!c.token) { showGhSettings(); showBinToast('⚙️ Сначала настройте GitHub токен', 'warn'); return; }
-
-  var data = ghCollectData(type);
+// ── Тихое авто-сохранение при скачивании PDF ─────────────────
+function ghAutoSave(type) {
+  if (!ghCfg().token) return; // нет токена — молча пропускаем
+  var data  = ghCollectData(type);
   var title = ghMakeTitle(type, data);
-
-  showBinToast('☁️ Сохраняю в облако...', 'warn');
+  var path  = GH_PATH + '/' + type + '.json';
 
   ghLoadHistory(type).then(function(history) {
     var now = new Date().toISOString();
-    // Обновляем если уже есть _histId (редактирование)
     var histId = data._histId;
-    var existing = histId ? history.docs.find(function(d) { return d.id === histId; }) : null;
+    var existing = histId ? history.docs.find(function(d){ return d.id === histId; }) : null;
 
     if (existing) {
-      existing.title = title;
+      existing.title      = title;
       existing.updated_at = now;
-      existing.data = data;
+      existing.data       = data;
     } else {
       var newDoc = { id: type + '-' + Date.now(), title: title, created_at: now, updated_at: now, data: data };
       history.docs.unshift(newDoc);
       histId = newDoc.id;
     }
 
-    var path = GH_PATH + '/' + type + '.json';
     return ghPutFile(path, { docs: history.docs }, '💾 ' + title, history.sha).then(function(res) {
-      if (res.content) _ghShaCache[type] = res.content.sha;
-      // Сохраняем histId в черновик
-      data._histId = histId;
-      if (type === 'kp')  { kp_items; localStorage.setItem('nemo_kp_draft', JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('nemo_kp_draft')||'{}'), {_histId: histId}))); }
-      if (type === 'sc')  { localStorage.setItem('nemo_inv_draft', JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('nemo_inv_draft')||'{}'), {_histId: histId}))); }
-      if (type === 'poa') { localStorage.setItem('nemo_poa_draft', JSON.stringify(Object.assign(JSON.parse(localStorage.getItem('nemo_poa_draft')||'{}'), {_histId: histId}))); }
-      showBinToast('✅ «' + title + '» сохранён в облако', 'success');
+      if (res && res.content) _ghShaCache[type] = res.content.sha;
+      // Запоминаем histId в черновике для будущих обновлений
+      var draftKey = { kp: 'nemo_kp_draft', sc: 'nemo_inv_draft', poa: 'nemo_poa_draft' }[type];
+      if (draftKey) {
+        try {
+          var draft = JSON.parse(localStorage.getItem(draftKey) || '{}');
+          draft._histId = histId;
+          localStorage.setItem(draftKey, JSON.stringify(draft));
+        } catch(e) {}
+      }
+      // Ненавязчивое уведомление
+      var btn = document.getElementById('gh-status-btn');
+      if (btn) { btn.textContent = '☁️✅'; setTimeout(function(){ ghUpdateStatusBtn(); }, 3000); }
+      showBinToast('☁️ «' + title + '» сохранён в историю', 'success');
     });
   }).catch(function(err) {
-    showBinToast('❌ Ошибка сохранения: ' + (err.message || err), 'warn');
+    // Молчим при ошибке — не мешаем скачиванию
+    console.warn('ghAutoSave error:', err.message);
   });
 }
 
@@ -2638,7 +2644,7 @@ function ghCloseHistory() {
 function ghRenderHistory(docs, type) {
   var body = document.getElementById('gh-hist-body');
   if (!docs || !docs.length) {
-    body.innerHTML = '<div class="gh-empty">📭 История пуста<br><small>Нажмите «☁️ Сохранить в облако» чтобы добавить первый документ</small></div>';
+    body.innerHTML = '<div class="gh-empty">📭 История пуста<br><small>Скачайте PDF — документ автоматически сохранится в историю</small></div>';
     return;
   }
 
