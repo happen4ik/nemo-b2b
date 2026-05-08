@@ -1,0 +1,60 @@
+{
+  "docs": [
+    {
+      "id": "kp-1778226732431",
+      "title": "КП №000001 — ТОО \"NEMO.KZ\"",
+      "created_at": "2026-05-08T07:52:12.431Z",
+      "updated_at": "2026-05-08T07:52:12.431Z",
+      "data": {
+        "_histId": null,
+        "client_company": "ТОО \"NEMO.KZ\"",
+        "client_bin": "200740026179",
+        "kp_number": "000001",
+        "kp_date": "2026-05-08",
+        "kp_valid_days": "14",
+        "manager_name": "Попов Владимир",
+        "manager_phone": "+7 706 618 60 88",
+        "payment_terms": "100% предоплата",
+        "delivery_terms": "",
+        "extra_notes": "",
+        "items": [
+          {
+            "id": 1,
+            "name": "\tIP видеокамера Hikvision DS-2CD1043G2-LIU",
+            "model": "",
+            "qty": 2,
+            "price": 31119
+          },
+          {
+            "id": 2,
+            "name": "Шкаф коммуникационный настенный SHIP EW5406.100 6U 540*450*327 мм",
+            "model": "",
+            "qty": 1,
+            "price": 37939
+          },
+          {
+            "id": 3,
+            "name": "Кабель сетевой SHIP D106-VS Cat.5e UTP 30В PE",
+            "model": "",
+            "qty": 1,
+            "price": 47381
+          },
+          {
+            "id": 4,
+            "name": "Сетевой видеорегистратор Hikvision DS-7616NXI-K2(E)",
+            "model": "",
+            "qty": 1,
+            "price": 83413
+          },
+          {
+            "id": 5,
+            "name": "\tIP видеокамера Hikvision DS-2CD1343G2-LIU",
+            "model": "",
+            "qty": 6,
+            "price": 31123
+          }
+        ]
+      }
+    }
+  ]
+}
