@@ -1,6 +1,21 @@
 {
   "docs": [
     {
+      "id": "sc-00000000004",
+      "title": "Счёт №00000000004",
+      "created_at": "2026-05-08T10:08:17.230Z",
+      "updated_at": "2026-05-08T10:08:17.230Z",
+      "data": {
+        "client_company": "",
+        "client_bin": "",
+        "client_address": "",
+        "client_contract": "",
+        "inv_number": "00000000004",
+        "inv_date": "2026-05-08",
+        "items": []
+      }
+    },
+    {
       "id": "sc-00000000003",
       "title": "Счёт №00000000003",
       "created_at": "2026-05-08T09:46:36.020Z",
