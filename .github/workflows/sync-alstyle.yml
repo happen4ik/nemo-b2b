@@ -1,0 +1,42 @@
+name: 🔄 Al-Style прайс (каждые 30 мин)
+ 
+on:
+  schedule:
+    - cron: '*/30 * * * *'   # каждые 30 минут
+  workflow_dispatch:          # ручной запуск из GitHub
+ 
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+ 
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+ 
+      - name: 🐍 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+ 
+      - name: 📦 Зависимости
+        run: pip install requests pandas openpyxl xlrd
+ 
+      - name: 🔄 Скачать и конвертировать прайс
+        env:
+          ALSTYLE_TOKEN: ${{ secrets.ALSTYLE_TOKEN }}
+        run: python scripts/sync_alstyle.py
+ 
+      - name: 💾 Коммит
+        run: |
+          git config user.name  "Price Bot"
+          git config user.email "bot@nemo-b2b"
+          git add cloud-data/alstyle.json
+          if git diff --staged --quiet; then
+            echo "Нет изменений"
+          else
+            UPDATED=$(date '+%d.%m.%Y %H:%M' -d '+5 hours')
+            git commit -m "📦 Al-Style прайс обновлён $UPDATED (Алматы)"
+            git push
+          fi
