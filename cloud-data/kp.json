@@ -1,6 +1,47 @@
 {
   "docs": [
     {
+      "id": "kp-000003",
+      "title": "КП №000003 — ТОО \"PINGWIN BOWLING\"",
+      "created_at": "2026-05-12T08:39:25.578Z",
+      "updated_at": "2026-05-12T08:39:25.578Z",
+      "data": {
+        "client_company": "ТОО \"PINGWIN BOWLING\"",
+        "client_bin": "231240010876",
+        "kp_number": "000003",
+        "kp_date": "2026-05-12",
+        "kp_valid_days": "7",
+        "manager_name": "Попов Владимир",
+        "manager_phone": "+7 706 618 60 88",
+        "payment_terms": "100% предоплата",
+        "delivery_terms": "От 5 до 10 раб. дней ",
+        "extra_notes": "",
+        "items": [
+          {
+            "id": 1,
+            "name": "Планшет Xiaomi REDMI Pad 2 Pro 12.1 дюйм 6 Гб/128 Гб серый",
+            "model": "",
+            "qty": 16,
+            "price": 118000
+          },
+          {
+            "id": 2,
+            "name": "Планшет OSCAL OSCAL Pad 200 LTE 13.4 дюйм 6 Гб/256 Гб серый 13.4 дюйм 6 Гб/256 Гб серый",
+            "model": "",
+            "qty": 16,
+            "price": 107991
+          },
+          {
+            "id": 3,
+            "name": "Планшет Lenovo IdeaTab TB336FU 11 дюйм 8 Гб/256 Гб серый",
+            "model": "",
+            "qty": 16,
+            "price": 117891
+          }
+        ]
+      }
+    },
+    {
       "id": "kp-1778226732431",
       "title": "КП №000001 — ТОО \"NEMO.KZ\"",
       "created_at": "2026-05-08T07:52:12.431Z",
