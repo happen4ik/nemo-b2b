@@ -1,203 +1,246 @@
 """
-Скачивает прайс Al-Style и конвертирует в JSON для Nemo B2B
-URL: https://b2b.al-style.kz/export/Al-Style_price.xlsx
+Скачивает YML-фид Al-Style и конвертирует в JSON для Nemo B2B
+Фид: https://apifeed.al-style.kz/feed.xml  (формат YML/Яндекс.Маркет)
+Резерв: https://b2b.al-style.kz/export/Al-Style_price.xlsx
 """
  
 import os, json, sys, io
 from datetime import datetime, timezone, timedelta
 import requests
-import pandas as pd
  
-PRICE_URL   = "https://b2b.al-style.kz/export/Al-Style_price.xlsx"
-TOKEN       = os.environ.get("ALSTYLE_TOKEN", "")
-OUT_DIR     = "cloud-data"
-OUT_FILE    = f"{OUT_DIR}/alstyle.json"
-ALMATY      = timezone(timedelta(hours=5))
+try:
+    from lxml import etree as ET
+    HAS_LXML = True
+except ImportError:
+    import xml.etree.ElementTree as ET
+    HAS_LXML = False
  
-def download():
-    print(f"⬇️  Скачиваем: {PRICE_URL}")
-    print(f"   Токен: {'есть (' + TOKEN[:8] + '...)' if TOKEN else 'НЕТ — добавьте ALSTYLE_TOKEN в Secrets'}")
+TOKEN    = os.environ.get("ALSTYLE_TOKEN", "78uoSPj9NHdGKTDlaXhYaUd8htymrs8q")
+YML_URL  = "https://apifeed.al-style.kz/feed.xml"
+XLS_URL  = "https://b2b.al-style.kz/export/Al-Style_price.xlsx"
+OUT_DIR  = "cloud-data"
+OUT_FILE = f"{OUT_DIR}/alstyle.json"
+ALMATY   = timezone(timedelta(hours=5))
  
-    # Все варианты авторизации
+# ── Скачать файл ──────────────────────────────────────────────
+def download(url):
+    print(f"⬇️  {url}")
     attempts = [
-        ("Bearer header",    {"headers": {"Authorization": f"Bearer {TOKEN}"}}),
-        ("Token header",     {"headers": {"Authorization": f"Token {TOKEN}"}}),
-        ("X-Api-Key header", {"headers": {"X-Api-Key": TOKEN}}),
-        ("?token= param",    {"params":  {"token": TOKEN}}),
-        ("?api_key= param",  {"params":  {"api_key": TOKEN}}),
-        ("Без авторизации",  {}),
+        {"params":  {"token": TOKEN}},
+        {"params":  {"api_key": TOKEN}},
+        {"headers": {"Authorization": f"Bearer {TOKEN}"}},
+        {"headers": {"X-Api-Key": TOKEN}},
+        {},
     ]
+    session = requests.Session()
+    session.headers.update({"User-Agent": "Mozilla/5.0", "Accept": "*/*"})
  
-    for name, opts in attempts:
+    for opts in attempts:
         try:
-            r = requests.get(
-                PRICE_URL,
-                timeout=60,
-                allow_redirects=True,
-                headers={"User-Agent": "Mozilla/5.0", "Accept": "*/*"},
-                **opts
-            )
-            print(f"   [{name}] → HTTP {r.status_code}, размер: {len(r.content)} байт")
- 
-            if r.status_code == 200 and len(r.content) > 500:
-                # Проверяем что это Excel
-                if r.content[:4] in (b'PK\x03\x04', b'\xd0\xcf\x11\xe0'):
-                    print(f"✅ Файл скачан ({name})")
-                    return r.content
-                else:
-                    print(f"   ⚠️  Ответ не Excel: {r.content[:100]}")
-            elif r.status_code in (401, 403):
-                print(f"   ⛔ Доступ запрещён — IP не в whitelist или неверный токен")
-            elif r.status_code == 404:
-                print(f"   ❌ Файл не найден по этому URL")
- 
+            r = session.get(url, timeout=60, allow_redirects=True, **opts)
+            print(f"   HTTP {r.status_code} | {len(r.content)} байт | {list(opts.keys()) or 'no-auth'}")
+            if r.status_code == 200 and len(r.content) > 200:
+                return r.content
+            if r.status_code == 403:
+                print(f"   ⛔ {r.text[:60]}")
         except Exception as e:
-            print(f"   ⚠️  Ошибка: {e}")
- 
+            print(f"   ⚠️  {e}")
     return None
  
-def parse(xlsx_bytes):
-    print("📊 Парсим Excel...")
-    xl = pd.ExcelFile(io.BytesIO(xlsx_bytes))
-    print(f"   Листов: {xl.sheet_names}")
+# ── Парсинг YML (Яндекс.Маркет XML) ──────────────────────────
+def parse_yml(content):
+    print("📊 Парсим YML-фид...")
+    try:
+        root = ET.fromstring(content)
+    except Exception as e:
+        print(f"❌ Ошибка XML: {e}")
+        return []
  
-    all_items = []
+    # Пространства имён — иногда есть, иногда нет
+    ns = ''
+    if root.tag.startswith('{'):
+        ns = root.tag.split('}')[0] + '}'
+ 
+    def tag(name): return f"{ns}{name}"
+ 
+    shop = root.find(tag('shop'))
+    if shop is None:
+        shop = root  # некоторые фиды без <shop>
+ 
+    # Категории → dict {id: name}
+    categories = {}
+    cats_el = shop.find(tag('categories'))
+    if cats_el is not None:
+        for cat in cats_el.findall(tag('category')):
+            categories[cat.get('id', '')] = (cat.text or '').strip()
+ 
+    # Валюты → dict {id: rate}
+    currencies = {'KZT': 1.0}
+    curr_el = shop.find(tag('currencies'))
+    if curr_el is not None:
+        for cur in curr_el.findall(tag('currency')):
+            try:
+                currencies[cur.get('id')] = float(cur.get('rate', 1) or 1)
+            except: pass
+ 
+    # Офферы (товары)
+    offers_el = shop.find(tag('offers'))
+    if offers_el is None:
+        print("⚠️  Тег <offers> не найден")
+        return []
+ 
+    items = []
+    for offer in offers_el.findall(tag('offer')):
+        def g(t):
+            el = offer.find(tag(t))
+            return (el.text or '').strip() if el is not None and el.text else ''
+ 
+        name     = g('name') or g('model') or g('typePrefix')
+        price_s  = g('price')
+        currency = g('currencyId') or 'KZT'
+        cat_id   = g('categoryId')
+        vendor   = g('vendor') or g('manufacturer') or 'Al-Style'
+        article  = g('vendorCode') or g('article') or offer.get('id', '')
+        qty_s    = g('count') or g('quantity') or g('stock')
+        available = offer.get('available', 'true').lower() != 'false'
+ 
+        if not name:
+            continue
+        try:
+            price = float(price_s.replace(' ', '').replace(',', '.')) if price_s else 0
+        except: price = 0
+        if price <= 0: continue
+ 
+        # Конвертируем в KZT если нужно
+        rate = currencies.get(currency, 1.0)
+        price_kzt = round(price * rate, 2) if currency != 'KZT' else price
+ 
+        try: qty = int(float(qty_s)) if qty_s else 0
+        except: qty = 0
+ 
+        items.append({
+            "article":  article[:100],
+            "name":     name[:200],
+            "category": categories.get(cat_id, cat_id)[:100],
+            "vendor":   vendor[:80],
+            "price":    round(price, 2),
+            "currency": currency,
+            "price_kzt": price_kzt,
+            "qty":      qty,
+            "available": available,
+        })
+ 
+    print(f"✅ YML: {len(items)} товаров")
+    return items
+ 
+# ── Парсинг Excel (резерв) ────────────────────────────────────
+def parse_xlsx(content):
+    try:
+        import pandas as pd
+    except ImportError:
+        print("⚠️  pandas не установлен")
+        return []
+ 
+    print("📊 Парсим Excel (резерв)...")
+    xl = pd.ExcelFile(io.BytesIO(content))
+    items = []
     for sheet in xl.sheet_names:
-        df_raw = pd.read_excel(io.BytesIO(xlsx_bytes), sheet_name=sheet, header=None, engine="openpyxl")
-        items = parse_sheet(df_raw, sheet)
-        print(f"   Лист «{sheet}»: {len(items)} товаров")
-        all_items.extend(items)
- 
-    return all_items
+        df = pd.read_excel(io.BytesIO(content), sheet_name=sheet, header=None, engine="openpyxl")
+        items.extend(parse_sheet(df, sheet))
+    print(f"✅ Excel: {len(items)} товаров")
+    return items
  
 def parse_sheet(df, sheet_name):
+    import pandas as pd
     header_row = None
     for i in range(min(20, len(df))):
         row = [str(c).lower().strip() for c in df.iloc[i]]
         joined = ' '.join(row)
-        has_name  = any(k in joined for k in ['наименован', 'название', 'name', 'товар', 'продукт'])
-        has_price = any(k in joined for k in ['цена', 'price', 'стоимость'])
-        if has_name and has_price:
-            header_row = i
-            break
- 
+        if any(k in joined for k in ['наименован','name']) and any(k in joined for k in ['цена','price']):
+            header_row = i; break
     if header_row is None:
-        return parse_hierarchical(df, sheet_name)
- 
-    df2 = df.copy()
-    df2.columns = [str(c).strip() for c in df.iloc[header_row]]
-    df2 = df2.iloc[header_row + 1:].reset_index(drop=True).dropna(how='all')
- 
-    col = find_columns(df2.columns.tolist())
+        return []
+    df.columns = [str(c).strip() for c in df.iloc[header_row]]
+    df = df.iloc[header_row + 1:].reset_index(drop=True).dropna(how='all')
+    col = find_cols(df.columns.tolist())
     items = []
-    current_cat = sheet_name
- 
-    for _, row in df2.iterrows():
+    for _, row in df.iterrows():
         name = str(row.get(col['name'], '') or '').strip()
-        if not name or name.lower() in ('nan', 'none', ''):
-            continue
- 
         price = safe_float(row.get(col['price'], 0) if col['price'] else 0)
-        if price <= 0:
-            continue
- 
-        currency = 'KZT'
-        if col['currency']:
-            c = str(row.get(col['currency'], '') or '').strip().upper()
-            if c in ('USD', 'EUR', 'RUB'):
-                currency = c
- 
+        if not name or price <= 0: continue
         items.append({
             "article":  str(row.get(col['article'], '') or '').strip()[:100] if col['article'] else '',
             "name":     name[:200],
-            "category": str(row.get(col['category'], '') or current_cat).strip()[:100] if col['category'] else current_cat,
+            "category": str(row.get(col['category'], '') or sheet_name).strip()[:100] if col['category'] else sheet_name,
             "vendor":   str(row.get(col['vendor'], '') or 'Al-Style').strip()[:80] if col['vendor'] else 'Al-Style',
-            "price":    round(price, 2),
-            "currency": currency,
+            "price":    round(price, 2), "currency": "KZT", "price_kzt": round(price, 2),
             "qty":      int(safe_float(row.get(col['qty'], 0))) if col['qty'] else 0,
+            "available": True,
         })
- 
     return items
  
-def parse_hierarchical(df, sheet_name):
-    items, current_cat = [], sheet_name
-    for _, row in df.iterrows():
-        vals = [str(v).strip() for v in row if str(v).strip() not in ('', 'nan', 'None')]
-        if not vals:
-            continue
-        if len(vals) == 1 and len(vals[0]) < 80:
-            current_cat = vals[0]
-            continue
-        if len(vals) >= 2:
-            name  = vals[0] if len(vals[0]) > 3 else (vals[1] if len(vals) > 1 else '')
-            price = next((safe_float(v) for v in vals[1:] if safe_float(v) > 0), 0)
-            if name and price > 0:
-                items.append({"article": "", "name": name[:200], "category": current_cat,
-                              "vendor": "Al-Style", "price": round(price, 2), "currency": "KZT", "qty": 0})
-    return items
- 
-def find_columns(headers):
-    def find(keywords):
-        for h in headers:
-            if any(k in str(h).lower() for k in keywords):
-                return h
-        return None
+def find_cols(headers):
+    def f(kw): return next((h for h in headers if any(k in str(h).lower() for k in kw)), None)
     return {
-        'name':     find(['наименован', 'название', 'товар', 'name', 'product']),
-        'article':  find(['артикул', 'article', 'sku', 'код', 'part']),
-        'price':    find(['цена', 'price', 'стоимость']),
-        'currency': find(['валют', 'currency']),
-        'qty':      find(['кол-во', 'количест', 'остат', 'qty', 'stock', 'свободно']),
-        'category': find(['категор', 'группа', 'раздел', 'category', 'group']),
-        'vendor':   find(['бренд', 'вендор', 'произво', 'vendor', 'brand']),
+        'name':    f(['наименован','название','товар','name']),
+        'article': f(['артикул','article','sku','код']),
+        'price':   f(['цена','price','стоимость']),
+        'currency':f(['валют','currency']),
+        'qty':     f(['кол-во','количест','остат','qty','stock','свободно']),
+        'category':f(['категор','группа','category']),
+        'vendor':  f(['бренд','вендор','произво','vendor']),
     }
  
 def safe_float(v):
-    try:
-        return float(str(v).replace(' ', '').replace(',', '.').replace('₸','').replace('$',''))
-    except:
-        return 0.0
+    try: return float(str(v).replace(' ','').replace(',','.').replace('₸',''))
+    except: return 0.0
  
-def save(items, success):
+# ── Сохранить ─────────────────────────────────────────────────
+def save(items, source_url):
     os.makedirs(OUT_DIR, exist_ok=True)
     now = datetime.now(ALMATY).strftime("%d.%m.%Y %H:%M")
- 
-    # Если скачать не удалось — сохраняем статус ошибки, старые данные не трогаем
-    if not success:
-        status_file = f"{OUT_DIR}/alstyle_status.json"
-        with open(status_file, "w") as f:
-            json.dump({"error": True, "checked_at": now, "message": "Не удалось скачать файл — IP не в whitelist"}, f)
-        print(f"⚠️  Статус ошибки сохранён в {status_file}")
-        return
- 
-    output = {
-        "source":     "Al-Style B2B",
-        "url":        PRICE_URL,
+    out = {
+        "source":     "Al-Style",
+        "feed_url":   source_url,
         "updated_at": now,
         "count":      len(items),
         "items":      items,
     }
     with open(OUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, separators=(',', ':'))
-    print(f"💾 Сохранено: {OUT_FILE} ({os.path.getsize(OUT_FILE)//1024} KB, {len(items)} товаров)")
+        json.dump(out, f, ensure_ascii=False, separators=(',', ':'))
+    kb = os.path.getsize(OUT_FILE) // 1024
+    print(f"💾 {OUT_FILE}: {kb} KB, {len(items)} товаров")
  
+# ── Главная логика ────────────────────────────────────────────
 if __name__ == "__main__":
-    xlsx = download()
-    if not xlsx:
-        print("\n" + "="*60)
-        print("❌ ФАЙЛ НЕ СКАЧАН")
-        print("Причина: GitHub Actions IP не в белом списке Al-Style")
-        print("Решение: напишите в Al-Style чтобы добавили в whitelist IP GitHub Actions")
-        print("ИЛИ: попросите Al-Style выдать публичную ссылку без whitelist")
-        print("="*60)
-        save([], success=False)
-        sys.exit(0)   # exit 0 — не считать ошибкой workflow
+    items, source = [], None
  
-    items = parse(xlsx)
+    # 1) Пробуем YML-фид
+    data = download(YML_URL)
+    if data and (data[:5] in (b'<?xml', b'<yml_') or b'<offer' in data[:2000]):
+        items = parse_yml(data)
+        source = YML_URL
+ 
+    # 2) Резерв — Excel
     if not items:
-        print("⚠️  Товары не найдены — возможно изменился формат файла")
-        save([], success=False)
+        print("⚠️  YML недоступен, пробуем Excel...")
+        data = download(XLS_URL)
+        if data and data[:4] in (b'PK\x03\x04', b'\xd0\xcf\x11\xe0'):
+            import io as _io
+            items = parse_xlsx(data)
+            source = XLS_URL
+ 
+    # 3) Оба недоступны
+    if not items:
+        print("\n" + "="*60)
+        print("❌ Оба источника недоступны (IP не в whitelist)")
+        print("Напишите в Al-Style: попросите whitelist для GitHub Actions")
+        print("="*60)
+        # Не падаем — сохраняем статус
+        os.makedirs(OUT_DIR, exist_ok=True)
+        with open(f"{OUT_DIR}/alstyle_status.json", "w") as f:
+            json.dump({"error": True, "checked_at": datetime.now(ALMATY).strftime("%d.%m.%Y %H:%M")}, f)
         sys.exit(0)
  
-    save(items, success=True)
-    print(f"🎉 Готово! {len(items)} товаров обновлено")
+    save(items, source)
+    print(f"🎉 Готово! Источник: {source}")
