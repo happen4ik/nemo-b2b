@@ -1,6 +1,29 @@
 {
   "docs": [
     {
+      "id": "sc-00000000231",
+      "title": "Счёт №00000000231 — АО «Казбургаз»",
+      "created_at": "2026-05-12T04:37:03.058Z",
+      "updated_at": "2026-05-12T04:37:03.058Z",
+      "data": {
+        "client_company": "АО «Казбургаз»",
+        "client_bin": "270300000816",
+        "client_address": "West Kazakhstan region, Burlinsky district, Aksai city, Industrial zone street, PO Box 81, postal code 090300",
+        "client_contract": "",
+        "inv_number": "00000000231",
+        "inv_date": "2026-05-12",
+        "items": [
+          {
+            "id": 1,
+            "name": "Мини ПК Firebat AM02-IG6616N8",
+            "qty": 5,
+            "unit": "шт",
+            "price": 229990
+          }
+        ]
+      }
+    },
+    {
       "id": "sc-00000000229",
       "title": "Счёт №00000000229 — ТОО  «G&S Gold Square»",
       "created_at": "2026-05-08T12:29:51.973Z",
