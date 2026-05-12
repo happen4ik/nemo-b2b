@@ -1,9 +1,12 @@
 name: 🔄 Al-Style прайс (каждые 30 мин)
  
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+ 
 on:
   schedule:
-    - cron: '*/30 * * * *'   # каждые 30 минут
-  workflow_dispatch:          # ручной запуск из GitHub
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
  
 jobs:
   sync:
@@ -32,11 +35,11 @@ jobs:
         run: |
           git config user.name  "Price Bot"
           git config user.email "bot@nemo-b2b"
-          git add cloud-data/alstyle.json
+          git add cloud-data/
           if git diff --staged --quiet; then
             echo "Нет изменений"
           else
-            UPDATED=$(date '+%d.%m.%Y %H:%M' -d '+5 hours')
+            UPDATED=$(TZ='Asia/Almaty' date '+%d.%m.%Y %H:%M')
             git commit -m "📦 Al-Style прайс обновлён $UPDATED (Алматы)"
             git push
           fi
