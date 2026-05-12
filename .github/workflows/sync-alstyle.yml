@@ -1,4 +1,4 @@
-name: 🔄 Al-Style прайс (каждые 30 мин)
+name: 🔄 Al-Style YML-фид (каждые 30 мин)
  
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -24,9 +24,9 @@ jobs:
           python-version: '3.11'
  
       - name: 📦 Зависимости
-        run: pip install requests pandas openpyxl xlrd
+        run: pip install requests lxml
  
-      - name: 🔄 Скачать и конвертировать прайс
+      - name: 🔄 Скачать YML и конвертировать
         env:
           ALSTYLE_TOKEN: ${{ secrets.ALSTYLE_TOKEN }}
         run: python scripts/sync_alstyle.py
@@ -40,6 +40,6 @@ jobs:
             echo "Нет изменений"
           else
             UPDATED=$(TZ='Asia/Almaty' date '+%d.%m.%Y %H:%M')
-            git commit -m "📦 Al-Style прайс обновлён $UPDATED (Алматы)"
+            git commit -m "📦 Al-Style прайс $UPDATED (Алматы)"
             git push
           fi
