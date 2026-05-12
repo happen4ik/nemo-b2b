@@ -244,3 +244,106 @@ if __name__ == "__main__":
  
     save(items, source)
     print(f"🎉 Готово! Источник: {source}")
+ 
+ 
+# ═══════════════════════════════════════════════════════════════
+# КУРС НБК — дополнительно сохраняем в cloud-data/nbk_rate.json
+# ═══════════════════════════════════════════════════════════════
+def fetch_nbk_rate():
+    print("\n💱 Получаем курс USD/KZT с НБК...")
+    sources = [
+        # RSS лента НБК
+        {
+            "name": "НБК RSS",
+            "url":  "https://nationalbank.kz/rss/rates_all.xml",
+            "type": "xml"
+        },
+        # Open Data API НБК
+        {
+            "name": "НБК Open Data",
+            "url":  "https://data.nationalbank.kz/api/v1/rates?currencyId=USD&language=ru",
+            "type": "json"
+        },
+    ]
+ 
+    for src in sources:
+        try:
+            r = requests.get(src["url"], timeout=20,
+                             headers={"User-Agent": "Mozilla/5.0", "Accept": "*/*"})
+            print(f"   [{src['name']}] HTTP {r.status_code}")
+            if r.status_code != 200:
+                continue
+ 
+            if src["type"] == "xml":
+                rate = parse_nbk_xml(r.text)
+            else:
+                rate = parse_nbk_json(r.json())
+ 
+            if rate and rate > 100:
+                print(f"   ✅ Курс USD/KZT = {rate}")
+                return rate
+ 
+        except Exception as e:
+            print(f"   ⚠️  {src['name']}: {e}")
+ 
+    print("   ❌ Не удалось получить курс НБК")
+    return None
+ 
+ 
+def parse_nbk_xml(xml_text):
+    """Парсит RSS XML НБК: находит USD и извлекает курс"""
+    try:
+        root = ET.fromstring(xml_text.encode("utf-8"))
+        for item in root.iter("item"):
+            # Ищем <index>USD</index>
+            idx = item.find("index")
+            if idx is not None and idx.text and idx.text.strip() == "USD":
+                for tag in ["description", "quant", "exchangedate"]:
+                    el = item.find(tag)
+                    if el is not None and el.text:
+                        val = float(''.join(c for c in el.text if c.isdigit() or c == '.'))
+                        if val > 100:
+                            return val
+            # Или ищем в <title>: "1 USD = 487.35 KZT"
+            title = item.find("title")
+            if title is not None and title.text and "USD" in title.text:
+                import re
+                m = re.search(r'=\s*([\d.,]+)', title.text)
+                if m:
+                    val = float(m.group(1).replace(",", "."))
+                    if val > 100:
+                        return val
+    except Exception as e:
+        print(f"   XML parse error: {e}")
+    return None
+ 
+ 
+def parse_nbk_json(data):
+    """Парсит JSON ответ API НБК"""
+    try:
+        arr = data.get("rates") or data.get("data") or data.get("items") or []
+        if isinstance(arr, list):
+            for item in arr:
+                cur = (item.get("currency") or item.get("currencyId") or "").upper()
+                if cur == "USD":
+                    val = item.get("rateToTenge") or item.get("rate") or item.get("value")
+                    if val:
+                        return float(val)
+    except Exception as e:
+        print(f"   JSON parse error: {e}")
+    return None
+ 
+ 
+def save_nbk_rate(rate):
+    os.makedirs(OUT_DIR, exist_ok=True)
+    now = datetime.now(ALMATY).strftime("%d.%m.%Y %H:%M")
+    out = {"currency": "USD", "rate_kzt": rate, "updated_at": now, "source": "nationalbank.kz"}
+    with open(f"{OUT_DIR}/nbk_rate.json", "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False)
+    print(f"   💾 Сохранено: cloud-data/nbk_rate.json → {rate} ₸")
+ 
+ 
+# Вызываем после основного синка
+rate = fetch_nbk_rate()
+if rate:
+    save_nbk_rate(rate)
