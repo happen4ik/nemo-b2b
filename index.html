@@ -488,6 +488,24 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
 .poa-doc .poa-sign-col{flex:1}
 .poa-doc .poa-sign-line{border-bottom:1px solid #444;margin-top:28px;margin-bottom:3px}
 .poa-doc .poa-sign-hint{font-size:9px;color:#777;text-align:center}
+/* ── CRM ─────────────────────────────────────────────────────── */
+[data-theme="dark"] .crm-card{background:#171727;border-color:#2a2a40}
+[data-theme="dark"] .crm-card-name{color:#dde1f0}
+[data-theme="dark"] .crm-card-info{color:#8890b0}
+[data-theme="dark"] .crm-card-bin{color:#6a7090}
+[data-theme="dark"] .crm-stat{background:#171727;border-color:#2a2a40;color:#8890b0}
+[data-theme="dark"] .crm-stat b{color:#dde1f0}
+[data-theme="dark"] .crm-search{background:#1f1f31;border-color:#3a3a55;color:#dde1f0}
+[data-theme="dark"] .crm-modal-box,.crm-modal-body{background:#171727}
+[data-theme="dark"] .crm-modal-head{background:#1e1e30;border-color:#2a2a40}
+[data-theme="dark"] .crm-modal-head h3{color:#dde1f0}
+[data-theme="dark"] .crm-field label{color:#8890b0}
+[data-theme="dark"] .crm-field input,[data-theme="dark"] .crm-field select,[data-theme="dark"] .crm-field textarea{background:#1f1f31;border-color:#3a3a55;color:#dde1f0}
+[data-theme="dark"] .crm-modal-foot,[data-theme="dark"] .crm-modal-body{border-color:#2a2a40;background:#171727}
+[data-theme="dark"] .crm-btn-edit{background:#252535;color:#b0b8d8;border-color:#3a3a55!important}
+[data-theme="dark"] .crm-deal-row{background:#1f1f31;color:#b0b8d8}
+@media(max-width:768px){.crm-grid{grid-template-columns:1fr}.crm-toolbar{flex-direction:column}.crm-row{grid-template-columns:1fr}}
+
 /* ── GitHub History System ──────────────────────────────────── */
 .gh-btn{padding:10px 18px;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:Arial,sans-serif;display:inline-flex;align-items:center;gap:6px}
 .gh-btn-save{background:#2ea043;color:#fff}.gh-btn-save:hover{background:#238636}
@@ -522,7 +540,84 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
 .gh-status{font-size:12px;display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font-weight:600}
 .gh-status.ok{background:#d1f0dc;color:#1a7a4a}.gh-status.err{background:#fde8e8;color:#c0392b}.gh-status.loading{background:#fff3d4;color:#b87a00}
 .gh-tabs-settings{display:flex;justify-content:flex-end;align-items:center;padding:0 8px 0 0;background:#f5f5f5;border-bottom:1px solid #ddd}
-/* ── Каталог товаров ─────────────────────────────────────────── */
+/* ══ CRM ══════════════════════════════════════════════════════ */
+#panel-crm{background:#f5f5f5;min-height:100vh;font-family:Arial,sans-serif}
+#panel-crm .crm-wrap{max-width:1200px;margin:0 auto;padding:1.25rem 1rem}
+#panel-crm h1{font-size:20px;font-weight:700;color:#222;margin-bottom:1rem}
+.crm-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
+.crm-search{flex:1;min-width:200px;padding:9px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;font-family:Arial}
+.crm-search:focus{outline:none;border-color:#39B2D1}
+.crm-btn-add{padding:9px 18px;background:#2ea043;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:Arial;font-weight:600;white-space:nowrap}
+.crm-btn-add:hover{background:#238636}
+.crm-btn-excel{padding:9px 16px;background:#1d6f42;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:Arial;white-space:nowrap}
+.crm-btn-excel:hover{background:#155c35}
+.crm-status-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
+.crm-sf-btn{padding:6px 14px;border-radius:20px;border:2px solid transparent;font-size:12px;font-weight:600;cursor:pointer;font-family:Arial;transition:all 0.15s}
+.crm-sf-btn.active{box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.crm-table-wrap{overflow-x:auto;border-radius:10px;border:1px solid #e0e0e0;background:#fff}
+.crm-table{width:100%;border-collapse:collapse;font-size:13px}
+.crm-table th{background:#f9f9f9;padding:10px 12px;text-align:left;border-bottom:1px solid #eee;font-size:12px;color:#666;font-weight:600;white-space:nowrap}
+.crm-table td{padding:10px 12px;border-bottom:1px solid #f5f5f5;vertical-align:middle}
+.crm-table tr:last-child td{border-bottom:none}
+.crm-table tr:hover td{background:#fafbff;cursor:pointer}
+.crm-status{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.crm-s-active{background:#d1f0dc;color:#1a7a4a}
+.crm-s-work{background:#d6eaff;color:#1a4a8a}
+.crm-s-won{background:#fff3d4;color:#7a5200}
+.crm-s-cold{background:#ebebeb;color:#666}
+.crm-s-lost{background:#fde8e8;color:#c0392b}
+.crm-actions{display:flex;gap:5px;flex-wrap:nowrap}
+.crm-act-btn{padding:4px 9px;border-radius:5px;font-size:11px;border:none;cursor:pointer;font-family:Arial;white-space:nowrap}
+.crm-act-edit{background:#f0f0f0;color:#333}.crm-act-edit:hover{background:#e0e0e0}
+.crm-act-kp{background:#e67e22;color:#fff}.crm-act-kp:hover{background:#ca6f1e}
+.crm-act-sc{background:#39B2D1;color:#fff}.crm-act-sc:hover{background:#2a9ab8}
+.crm-act-del{background:#fff;color:#e24b4a;border:1px solid #e24b4a}.crm-act-del:hover{background:#fff5f5}
+.crm-stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1rem}
+.crm-stat{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:10px 16px;font-size:12px;color:#666;text-align:center;min-width:80px}
+.crm-stat b{display:block;font-size:22px;font-weight:700;color:#222}
+.crm-empty{text-align:center;padding:60px 20px;color:#aaa;font-size:14px}
+/* CRM Modal */
+.crm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:600;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.crm-modal.show{display:flex}
+.crm-modal-box{background:#fff;border-radius:14px;width:580px;max-width:100%;margin:auto;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
+.crm-modal-head{padding:18px 22px;background:#f9f9f9;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+.crm-modal-head h3{font-size:16px;font-weight:700;margin:0;color:#222}
+.crm-modal-body{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.crm-modal-body .full{grid-column:1/-1}
+.crm-modal-body label{font-size:12px;color:#666;display:block;margin-bottom:4px}
+.crm-modal-body input,.crm-modal-body select,.crm-modal-body textarea{width:100%;padding:9px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;font-family:Arial;box-sizing:border-box}
+.crm-modal-body textarea{height:70px;resize:vertical}
+.crm-modal-body input:focus,.crm-modal-body select:focus,.crm-modal-body textarea:focus{outline:none;border-color:#39B2D1}
+.crm-modal-foot{padding:16px 22px;border-top:1px solid #eee;display:flex;gap:8px;justify-content:flex-end}
+/* Dark CRM */
+[data-theme="dark"] #panel-crm{background:#0d0d1a}
+[data-theme="dark"] #panel-crm h1{color:#dde1f0}
+[data-theme="dark"] .crm-table-wrap{background:#171727;border-color:#2a2a40}
+[data-theme="dark"] .crm-table th{background:#1f1f31;color:#8890b0;border-color:#2a2a40}
+[data-theme="dark"] .crm-table td{border-color:#1f1f31;color:#dde1f0}
+[data-theme="dark"] .crm-table tr:hover td{background:#1e1e30}
+[data-theme="dark"] .crm-stat{background:#171727;border-color:#2a2a40;color:#8890b0}
+[data-theme="dark"] .crm-stat b{color:#dde1f0}
+[data-theme="dark"] .crm-search{background:#1f1f31;border-color:#3a3a55;color:#dde1f0}
+[data-theme="dark"] .crm-modal-box{background:#171727}
+[data-theme="dark"] .crm-modal-head{background:#1e1e30;border-color:#2a2a40}
+[data-theme="dark"] .crm-modal-head h3{color:#dde1f0}
+[data-theme="dark"] .crm-modal-body{background:#171727;color:#dde1f0}
+[data-theme="dark"] .crm-modal-body label{color:#8890b0}
+[data-theme="dark"] .crm-modal-body input,[data-theme="dark"] .crm-modal-body select,[data-theme="dark"] .crm-modal-body textarea{background:#1f1f31;border-color:#3a3a55;color:#dde1f0}
+[data-theme="dark"] .crm-modal-foot{border-color:#2a2a40;background:#171727}
+[data-theme="dark"] .crm-s-active{background:#0d2e1a;color:#4dc870}
+[data-theme="dark"] .crm-s-work{background:#0d1e3a;color:#5a9ae8}
+[data-theme="dark"] .crm-s-won{background:#2a2010;color:#d4a017}
+[data-theme="dark"] .crm-s-cold{background:#252535;color:#9090b0}
+[data-theme="dark"] .crm-s-lost{background:#2e0d0d;color:#e24b4a}
+
+[data-theme="dark"] .crm-act-edit{background:#252535;color:#dde1f0}
+[data-theme="dark"] .crm-act-del{background:transparent}
+@media(max-width:768px){
+  .crm-modal-body{grid-template-columns:1fr}
+  .crm-table td:nth-child(4),.crm-table th:nth-child(4){display:none}
+}
 #panel-cat{background:var(--bg,#f5f5f5);min-height:100vh;font-family:Arial,sans-serif}
 #panel-cat .cat-wrap{max-width:1200px;margin:0 auto;padding:1.25rem 1rem}
 #panel-cat h1{font-size:20px;font-weight:700;color:#222;margin-bottom:1rem}
@@ -557,10 +652,6 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
 .cat-price-usd{color:#7a5200}
 .cat-qty{color:#1a7a4a;font-weight:600}
 .cat-qty-zero{color:#c0392b}
-.cat-add-kp{padding:5px 10px;background:#e67e22;color:#fff;border:none;border-radius:5px;font-size:11px;cursor:pointer;white-space:nowrap;font-family:Arial}
-.cat-add-kp:hover{background:#ca6f1e}
-.cat-add-sc{padding:5px 10px;background:#39B2D1;color:#fff;border:none;border-radius:5px;font-size:11px;cursor:pointer;white-space:nowrap;font-family:Arial}
-.cat-add-sc:hover{background:#2a9ab8}
 .cat-pagination{display:flex;align-items:center;justify-content:center;gap:6px;padding:14px;flex-wrap:wrap}
 .cat-page-btn{padding:6px 12px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-size:13px;font-family:Arial}
 .cat-page-btn:hover{background:#f0f0f0}
@@ -696,6 +787,7 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
   <button class="tab-btn active" onclick="showTopPanel(&#39;sc&#39;,this)">💰 Счёт на оплату</button>
   <button class="tab-btn" onclick="showTopPanel(&#39;poa&#39;,this)">📋 Доверенность (Ф-3-2)</button>
   <button class="tab-btn" onclick="showTopPanel(&#39;cat&#39;,this)">📦 Каталог товаров</button>
+  <button class="tab-btn" onclick="showTopPanel(&#39;crm&#39;,this)">👥 CRM — Клиенты</button>
   <button class="gh-btn-settings" onclick="showGhSettings()" title="Настройки GitHub синхронизации" style="margin-left:auto;margin-right:4px" id="gh-status-btn">☁️</button>
   <button onclick="toggleTheme()" id="theme-toggle-btn" title="Сменить тему" style="background:none;border:none;font-size:20px;cursor:pointer;padding:4px 10px;border-radius:6px;color:rgba(255,255,255,0.8);margin-right:6px">🌙</button>
 </div>
@@ -813,7 +905,7 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
 
   <div class="actions">
     <button class="btn-primary" onclick="showPreview()">Предпросмотр и редактирование</button>
-    <button class="btn-secondary" onclick="copyText()">Скопировать текст</button>
+    <button class="btn-secondary" onclick="kpExportExcel()">📊 Выгрузить в Excel</button>
     <button class="btn-orange" onclick="showPreviewForPDF()">Скачать PDF</button>
     <button class="gh-btn-manual-save" onclick="ghManualSave('kp')">☁️ Сохранить</button>
     <button class="gh-btn gh-btn-hist" onclick="ghShowHistory('kp')">📋 История КП</button>
@@ -826,7 +918,7 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
     <div class="preview-actions">
       <span>Экспорт:</span>
       <button class="btn-orange" onclick="downloadPDF()">Скачать PDF</button>
-      <button class="btn-secondary" onclick="copyText()">Копировать текст</button>
+      <button class="btn-secondary" onclick="kpExportExcel()">📊 Excel</button>
       <button class="btn-secondary" onclick="closePreview()" style="margin-left:8px">Закрыть</button>
     </div>
     <div style="padding:8px 16px;background:#fff8e6;border-bottom:1px solid #f0d080">
@@ -973,7 +1065,7 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
 
   <div class="actions">
     <button class="btn-primary" onclick="sc_showPreview()">Предпросмотр и редактирование</button>
-    <button class="btn-secondary" onclick="sc_copyText()">Скопировать текст</button>
+    <button class="btn-secondary" onclick="scExportExcel()">📊 Выгрузить в Excel</button>
     <button class="btn-teal" onclick="sc_showPreviewForPDF()">Скачать PDF</button>
     <button class="gh-btn-manual-save" onclick="ghManualSave('sc')">☁️ Сохранить</button>
     <button class="gh-btn gh-btn-hist" onclick="ghShowHistory('sc')">📋 История счетов</button>
@@ -986,7 +1078,7 @@ html,body{height:100%;font-family:Arial,sans-serif;font-size:13px;background:#f0
     <div class="preview-actions">
       <span style="font-size:13px;color:#888">Экспорт:</span>
       <button class="btn-teal" onclick="sc_downloadPDF()">Скачать PDF</button>
-      <button class="btn-secondary" onclick="sc_copyText()">Копировать текст</button>
+      <button class="btn-secondary" onclick="scExportExcel()">📊 Excel</button>
       <button class="btn-secondary" onclick="sc_closePreview()" style="margin-left:8px">Закрыть</button>
     </div>
     <div style="padding:8px 16px;background:#f0fbff;border-bottom:1px solid #b0dff0">
@@ -1755,7 +1847,9 @@ function resetSCCounter(){
   localStorage.setItem('nemo_inv_counter',num-1);
   document.getElementById('sc__inv_number').value=String(num).padStart(11,'0');
 }
+var _activePanel = 'sc'; // отслеживаем активную панель
 function showTopPanel(name,btn){
+  _activePanel = name;
   document.querySelectorAll('.sub-panel').forEach(function(p){
     p.style.display='none';
   });
@@ -1782,45 +1876,99 @@ function numToWords(n){
   if(r>0)res+=g(r);
   return res.trim()+' тенге '+(tiin<10?'0':'')+tiin+' тиын';
 }
-function loadStamp(input){
-  var file=input.files[0];if(!file)return;
-  var pfx=input.id.startsWith('kp__')?'kp__':'sc__';
-  var key=pfx==='kp__'?'nemo_stamp':'nemo_stamp_inv';
-  var reader=new FileReader();
-  reader.onload=function(e){window._stampData=e.target.result;
-    document.getElementById(pfx+'stamp_img').src=e.target.result;
-    document.getElementById(pfx+'stamp_preview').style.display='flex';
-    document.getElementById(pfx+'stamp_empty').style.display='none';
-    document.getElementById(pfx+'stamp_save_btn').style.display='inline-block';};
+// ── Печать — единая реализация для всех вкладок ──────────────
+var _stamps = {};  // {kp: base64, sc: base64}
+
+function loadStamp(input) {
+  var file = input.files[0]; if (!file) return;
+  var pfx  = input.id.startsWith('kp__') ? 'kp' : 'sc';
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var data = e.target.result;
+    _stamps[pfx] = data;
+    stampApply(pfx, data);
+    var saveBtn = document.getElementById(pfx + '__stamp_save_btn');
+    if (saveBtn) saveBtn.style.display = 'inline-block';
+  };
   reader.readAsDataURL(file);
 }
-function saveStamp(){
-  if(!window._stampData){alert('Сначала загрузите печать!');return;}
-  var isKP=document.getElementById('panel-kp').classList.contains('active');
-  var pfx=isKP?'kp__':'sc__'; var key=isKP?'nemo_stamp':'nemo_stamp_inv';
-  try{localStorage.setItem(key,window._stampData);
-    document.getElementById(pfx+'stamp_save_btn').textContent='Сохранено!';
-    setTimeout(function(){document.getElementById(pfx+'stamp_save_btn').textContent='Сохранить печать';},2000);
-  }catch(e){alert('Файл слишком большой.');}
+
+function saveStamp() {
+  var pfx = _activePanel === 'kp' ? 'kp' : 'sc';
+  var data = _stamps[pfx];
+  if (!data) { showBinToast('⚠️ Сначала загрузите печать!', 'warn'); return; }
+  var key = pfx === 'kp' ? 'nemo_stamp' : 'nemo_stamp_inv';
+  try {
+    localStorage.setItem(key, data);
+    stampSaveToCloud();
+    showBinToast('✅ Печать сохранена', 'success');
+    var btn = document.getElementById(pfx + '__stamp_save_btn');
+    if (btn) { btn.textContent = 'Сохранено!'; setTimeout(function(){ btn.textContent = 'Сохранить печать'; }, 2000); }
+  } catch(e) { showBinToast('❌ Файл слишком большой для сохранения', 'warn'); }
 }
-function removeStamp(){
-  var isKP=document.getElementById('panel-kp').classList.contains('active');
-  var pfx=isKP?'kp__':'sc__'; var key=isKP?'nemo_stamp':'nemo_stamp_inv';
-  window._stampData=null;localStorage.removeItem(key);
-  document.getElementById(pfx+'stamp_img').src='';
-  document.getElementById(pfx+'stamp_preview').style.display='none';
-  document.getElementById(pfx+'stamp_empty').style.display='inline';
-  document.getElementById(pfx+'stamp_save_btn').style.display='none';
+
+function removeStamp() {
+  var pfx = _activePanel === 'kp' ? 'kp' : 'sc';
+  var key = pfx === 'kp' ? 'nemo_stamp' : 'nemo_stamp_inv';
+  _stamps[pfx] = null;
+  localStorage.removeItem(key);
+  stampApply(pfx, null);
+  stampSaveToCloud();
 }
-function initAllStamps(){
-  var kp=localStorage.getItem('nemo_stamp');
-  if(kp){window._stampData=kp;document.getElementById('kp__stamp_img').src=kp;
-    document.getElementById('kp__stamp_preview').style.display='flex';
-    document.getElementById('kp__stamp_empty').style.display='none';}
-  var sc=localStorage.getItem('nemo_stamp_inv');
-  if(sc){document.getElementById('sc__stamp_img').src=sc;
-    document.getElementById('sc__stamp_preview').style.display='flex';
-    document.getElementById('sc__stamp_empty').style.display='none';}
+
+function stampApply(pfx, data) {
+  var img     = document.getElementById(pfx + '__stamp_img');
+  var preview = document.getElementById(pfx + '__stamp_preview');
+  var empty   = document.getElementById(pfx + '__stamp_empty');
+  var saveBtn = document.getElementById(pfx + '__stamp_save_btn');
+  if (data) {
+    if (img)     img.src = data;
+    if (preview) preview.style.display = 'flex';
+    if (empty)   empty.style.display   = 'none';
+  } else {
+    if (img)     img.src = '';
+    if (preview) preview.style.display = 'none';
+    if (empty)   empty.style.display   = 'inline';
+    if (saveBtn) saveBtn.style.display = 'none';
+    var upload = document.getElementById(pfx + '__stamp_upload');
+    if (upload) upload.value = '';
+  }
+}
+
+// ── Облачное сохранение печатей ──────────────────────────────
+function stampSaveToCloud() {
+  if (!ghCfg().token) return;
+  var payload = {
+    kp:         _stamps.kp  || null,
+    sc:         _stamps.sc  || null,
+    updated_at: new Date().toISOString()
+  };
+  var path = GH_PATH + '/stamps.json';
+  ghGetFile(path).then(function(file) {
+    return ghPutFile(path, payload, '🖨 Печати обновлены', file ? file.sha : null);
+  }).catch(function(){});
+}
+
+function stampLoadFromCloud() {
+  // Сначала загружаем из localStorage
+  var kpLocal = localStorage.getItem('nemo_stamp');
+  var scLocal = localStorage.getItem('nemo_stamp_inv');
+  if (kpLocal) { _stamps.kp = kpLocal; stampApply('kp', kpLocal); }
+  if (scLocal) { _stamps.sc = scLocal; stampApply('sc', scLocal); }
+
+  // Потом пробуем облако (может быть свежее)
+  if (!ghCfg().token) return;
+  var path = GH_PATH + '/stamps.json';
+  ghGetFile(path).then(function(file) {
+    if (!file) return;
+    var d = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\s/g,'')))));
+    if (d.kp  && d.kp  !== _stamps.kp)  { _stamps.kp  = d.kp;  stampApply('kp', d.kp);  localStorage.setItem('nemo_stamp', d.kp); }
+    if (d.sc  && d.sc  !== _stamps.sc)  { _stamps.sc  = d.sc;  stampApply('sc', d.sc);  localStorage.setItem('nemo_stamp_inv', d.sc); }
+  }).catch(function(){});
+}
+
+function initAllStamps() {
+  stampLoadFromCloud();
 }
 
 
@@ -2216,48 +2364,56 @@ function copyText(){
   const d=getData();const sub=d.sub,vat=Math.round(sub*16/116),total=sub;
   const rows=d.items.map((it,i)=>`${i+1}. ${it.name} (${it.model||'—'}) — ${it.qty} шт. × ${fmt(it.price)} ₸ = ${fmt(it.qty*it.price)} ₸`).join('\n');
   const text=`КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ №${d.kp_number}\nДата: ${d.kp_date} | Срок действия: ${d.kp_valid_days} дн.\n\nКому: ${d.client_company}\nБИН: ${d.client_bin}\n\nСОСТАВ ПРЕДЛОЖЕНИЯ:\n${rows}\n\nИТОГО (с НДС 16%): ${fmt(total)} ₸\n\nУСЛОВИЯ:\nОплата: ${d.payment_terms}\nДоставка: ${d.delivery_terms}\n${d.extra_notes?'Примечание: '+d.extra_notes+'\n':''}\nМенеджер: ${d.manager_name}, ${d.manager_phone}\nNemo.kz — nemo.kz`;
-  navigator.clipboard.writeText(text).then(()=>alert('Текст скопирован в буфер обмена!'));
+  navigator.clipboard.writeText(text).then(()=>showBinToast('✅ Текст скопирован','success'));
 }
 
-function loadStamp(input){
-  const file=input.files[0];
-  if(!file)return;
-  const reader=new FileReader();
-  reader.onload=function(e){
-    window._stampData=e.target.result;
-    document.getElementById('kp__stamp_img').src=e.target.result;
-    document.getElementById('kp__stamp_preview').style.display='flex';
-    document.getElementById('kp__stamp_empty').style.display='none';
-    document.getElementById('kp__stamp_save_btn').style.display='inline-block';
-  };
-  reader.readAsDataURL(file);
+function kpExportExcel() {
+  if (typeof XLSX === 'undefined') { showBinToast('❌ XLSX не загружен', 'warn'); return; }
+  var d = getData();
+  if (!d.items || !d.items.length) { showBinToast('⚠️ Нет позиций для экспорта', 'warn'); return; }
+
+  var rows = [];
+  // Шапка документа
+  rows.push(['КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ № ' + (d.kp_number || '—')]);
+  rows.push(['Дата:', d.kp_date || '—', 'Срок действия:', (d.kp_valid_days || '—') + ' дн.']);
+  rows.push([]);
+  rows.push(['Кому:', d.client_company || '—']);
+  rows.push(['БИН:', d.client_bin || '—']);
+  rows.push([]);
+  // Таблица товаров
+  rows.push(['№', 'Наименование', 'Артикул', 'Кол-во', 'Цена, ₸', 'Сумма, ₸']);
+  var total = 0;
+  d.items.forEach(function(it, i) {
+    var sum = (it.qty || 0) * (it.price || 0);
+    total += sum;
+    rows.push([i + 1, it.name || '', it.model || '', it.qty || 0, it.price || 0, sum]);
+  });
+  rows.push([]);
+  rows.push(['', '', '', '', 'ИТОГО:', total]);
+  rows.push([]);
+  // Условия
+  rows.push(['Условия оплаты:', d.payment_terms || '—']);
+  rows.push(['Срок поставки:', d.delivery_terms || '—']);
+  if (d.extra_notes) rows.push(['Примечание:', d.extra_notes]);
+  rows.push([]);
+  rows.push(['Менеджер:', d.manager_name || '', 'Тел:', d.manager_phone || '']);
+
+  var ws = XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols'] = [{wch:4},{wch:40},{wch:16},{wch:8},{wch:14},{wch:14}];
+  // Жирный заголовок
+  if (ws['A1']) ws['A1'].s = { font: { bold: true, sz: 13 } };
+  // Жирный итог
+  var totalRow = 7 + d.items.length;
+  var totalCell = 'F' + (totalRow + 1);
+  if (ws[totalCell]) ws[totalCell].s = { font: { bold: true } };
+
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'КП');
+  var fname = 'КП_' + (d.kp_number || '001') + '_' + (d.client_company || '').slice(0, 20).replace(/[^а-яёА-ЯЁa-zA-Z0-9]/g,'_') + '.xlsx';
+  XLSX.writeFile(wb, fname);
+  showBinToast('✅ КП выгружен в Excel', 'success');
 }
-function saveStamp(){
-  if(!window._stampData){alert('Сначала загрузите печать!');return;}
-  try{
-    localStorage.setItem('nemo_stamp',window._stampData);
-    document.getElementById('kp__stamp_save_btn').textContent='Сохранено!';
-    setTimeout(()=>document.getElementById('kp__stamp_save_btn').textContent='Сохранить печать',2000);
-  }catch(e){alert('Не удалось сохранить — файл слишком большой для браузера.');}
-}
-function removeStamp(){
-  window._stampData=null;
-  localStorage.removeItem('nemo_stamp');
-  document.getElementById('kp__stamp_upload').value='';
-  document.getElementById('kp__stamp_preview').style.display='none';
-  document.getElementById('kp__stamp_empty').style.display='inline';
-  document.getElementById('kp__stamp_save_btn').style.display='none';
-}
-function initStamp(){
-  const saved=localStorage.getItem('nemo_stamp');
-  if(saved){
-    window._stampData=saved;
-    document.getElementById('kp__stamp_img').src=saved;
-    document.getElementById('kp__stamp_preview').style.display='flex';
-    document.getElementById('kp__stamp_empty').style.display='none';
-    document.getElementById('kp__stamp_save_btn').style.display='none';
-  }
-}
+
 
 document.getElementById('kp__manager_name').value='Попов Владимир';
 document.getElementById('kp__manager_phone').value='+7 706 618 60 88';
@@ -2582,37 +2738,46 @@ function sc_copyText(){
   const d=sc_getData();
   const rows=d.items.map((it,i)=>`${i+1}. ${it.name} — ${it.qty} ${it.unit} × ${fmt(it.price)} ₸ = ${fmt(it.qty*it.price)} ₸`).join('\n');
   const text=`СЧЁТ НА ОПЛАТУ №${d.inv_number}\nДата: ${fmtDate(d.inv_date)}\n\nПоставщик: ТОО «Nemo.kz», БИН 200740026179\nПокупатель: ${d.client_company}, БИН/ИИН ${d.client_bin}\nАдрес: ${d.client_address}\n${d.client_contract?'Договор: '+d.client_contract+'\n':''}\n${rows}\n\nИтого: ${fmt(d.total)} ₸\nВ том числе НДС: ${fmt(d.vat)} ₸\n${numToWords(d.total)}\n\nИИК: KZ428562203142893508 | Банк ЦентрКредит | БИК: KCJBKZKX`;
-  navigator.clipboard.writeText(text).then(()=>alert('Текст скопирован!'));
+  navigator.clipboard.writeText(text).then(()=>showBinToast('✅ Текст скопирован','success'));
 }
 
-function loadStamp(input){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=function(e){
-    window._stampData=e.target.result;
-    document.getElementById('sc__stamp_img').src=e.target.result;
-    document.getElementById('sc__stamp_preview').style.display='flex';
-    document.getElementById('sc__stamp_empty').style.display='none';
-    document.getElementById('sc__stamp_save_btn').style.display='inline-block';
-  };
-  reader.readAsDataURL(file);
+function scExportExcel() {
+  if (typeof XLSX === 'undefined') { showBinToast('❌ XLSX не загружен', 'warn'); return; }
+  var d = sc_getData();
+  if (!d.items || !d.items.length) { showBinToast('⚠️ Нет позиций для экспорта', 'warn'); return; }
+
+  var rows = [];
+  rows.push(['СЧЁТ НА ОПЛАТУ № ' + (d.inv_number || '—')]);
+  rows.push(['Дата:', fmtDate(d.inv_date) || '—']);
+  rows.push([]);
+  rows.push(['Поставщик:', 'ТОО «Nemo.kz»', 'БИН:', '200740026179']);
+  rows.push(['Покупатель:', d.client_company || '—', 'БИН:', d.client_bin || '—']);
+  rows.push(['Адрес:', d.client_address || '—']);
+  if (d.client_contract) rows.push(['Договор:', d.client_contract]);
+  rows.push([]);
+  rows.push(['№', 'Наименование', 'Ед.изм.', 'Кол-во', 'Цена, ₸', 'Сумма, ₸']);
+  d.items.forEach(function(it, i) {
+    var sum = (it.qty || 0) * (it.price || 0);
+    rows.push([i + 1, it.name || '', it.unit || 'шт.', it.qty || 0, it.price || 0, sum]);
+  });
+  rows.push([]);
+  rows.push(['', '', '', '', 'Итого:', d.total || 0]);
+  rows.push(['', '', '', '', 'НДС:', d.vat || 0]);
+  rows.push(['', '', '', '', 'ИТОГО с НДС:', d.total || 0]);
+  rows.push([]);
+  rows.push(['Банк:', 'Банк ЦентрКредит', 'БИК:', 'KCJBKZKX']);
+  rows.push(['ИИК:', 'KZ428562203142893508']);
+
+  var ws = XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols'] = [{wch:4},{wch:40},{wch:8},{wch:8},{wch:14},{wch:14}];
+
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Счёт');
+  var fname = 'Счёт_' + (d.inv_number || '001') + '_' + (d.client_company || '').slice(0, 20).replace(/[^а-яёА-ЯЁa-zA-Z0-9]/g,'_') + '.xlsx';
+  XLSX.writeFile(wb, fname);
+  showBinToast('✅ Счёт выгружен в Excel', 'success');
 }
-function saveStamp(){
-  if(!window._stampData){alert('Сначала загрузите печать!');return;}
-  try{localStorage.setItem('nemo_stamp_inv',window._stampData);document.getElementById('sc__stamp_save_btn').textContent='Сохранено!';setTimeout(()=>document.getElementById('sc__stamp_save_btn').textContent='Сохранить печать',2000);}
-  catch(e){alert('Файл слишком большой для браузера.');}
-}
-function removeStamp(){
-  window._stampData=null;localStorage.removeItem('nemo_stamp_inv');
-  document.getElementById('sc__stamp_upload').value='';
-  document.getElementById('sc__stamp_preview').style.display='none';
-  document.getElementById('sc__stamp_empty').style.display='inline';
-  document.getElementById('sc__stamp_save_btn').style.display='none';
-}
-function initStamp(){
-  const saved=localStorage.getItem('nemo_stamp_inv');
-  if(saved){window._stampData=saved;document.getElementById('sc__stamp_img').src=saved;document.getElementById('sc__stamp_preview').style.display='flex';document.getElementById('sc__stamp_empty').style.display='none';document.getElementById('sc__stamp_save_btn').style.display='none';}
-}
+
 
 function sc_getCurrentNum(){return parseInt(localStorage.getItem('nemo_inv_counter')||'0')}
 function fmtNum(n){return String(n).padStart(11,'0')}
@@ -3393,6 +3558,241 @@ function ghUpdateStatusBtn() {
   btn.title = ghCfg().token ? 'GitHub подключён — нажмите для настроек' : 'Настроить GitHub синхронизацию';
 }
 
+// ── Тема: светлая / тёмная ────────────────────────────────────
+function toggleTheme() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  setTheme(isDark ? 'light' : 'dark');
+}
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('nemo_theme', theme);
+  var btn = document.getElementById('theme-toggle-btn');
+  if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+(function(){
+  var saved = localStorage.getItem('nemo_theme');
+  if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) saved = 'dark';
+  if (saved) setTheme(saved);
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// CRM — Клиентская база
+// ═══════════════════════════════════════════════════════════════
+
+var crm_clients      = [];
+var crm_filtered     = [];
+var crm_statusFilter = '';
+
+var CRM_STATUS = {
+  active: { label: '🟢 Активный',  cls: 'crm-s-active' },
+  work:   { label: '🔵 В работе',  cls: 'crm-s-work'   },
+  won:    { label: '🏆 Сделка',    cls: 'crm-s-won'    },
+  cold:   { label: '❄️ Холодный', cls: 'crm-s-cold'   },
+  lost:   { label: '❌ Отказ',     cls: 'crm-s-lost'   },
+};
+
+function crmOpenModal(id) {
+  var modal = document.getElementById('crm-modal');
+  var title = document.getElementById('crm-modal-title');
+  var flds  = ['edit-id','company','bin','status','contact','position','phone','email','address','deal-amount','notes'];
+  if (id) {
+    var c = crm_clients.find(function(c){ return c.id === id; });
+    if (!c) return;
+    title.textContent = '✏️ Редактировать клиента';
+    document.getElementById('crm-edit-id').value      = c.id;
+    document.getElementById('crm-company').value       = c.company      || '';
+    document.getElementById('crm-bin').value           = c.bin          || '';
+    document.getElementById('crm-status').value        = c.status       || 'active';
+    document.getElementById('crm-contact').value       = c.contact      || '';
+    document.getElementById('crm-position').value      = c.position     || '';
+    document.getElementById('crm-phone').value         = c.phone        || '';
+    document.getElementById('crm-email').value         = c.email        || '';
+    document.getElementById('crm-address').value       = c.address      || '';
+    document.getElementById('crm-deal-amount').value   = c.deal_amount  || '';
+    document.getElementById('crm-notes').value         = c.notes        || '';
+  } else {
+    title.textContent = '+ Новый клиент';
+    flds.forEach(function(f){ var el = document.getElementById('crm-' + f); if (el) el.value = ''; });
+    document.getElementById('crm-status').value = 'active';
+  }
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  setTimeout(function(){ document.getElementById('crm-company').focus(); }, 100);
+}
+
+function crmCloseModal() {
+  document.getElementById('crm-modal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function crmSaveClient() {
+  var company = document.getElementById('crm-company').value.trim();
+  if (!company) { showBinToast('⚠️ Укажите название компании', 'warn'); return; }
+  var id  = document.getElementById('crm-edit-id').value;
+  var now = new Date().toISOString();
+  var dateStr = new Date().toLocaleDateString('ru-RU', { day:'2-digit', month:'2-digit', year:'numeric' });
+  var client = {
+    id:           id || 'crm-' + Date.now(),
+    created_at:   id ? ((crm_clients.find(function(c){ return c.id===id; })||{}).created_at || now) : now,
+    updated_at:   now,
+    last_contact: dateStr,
+    company:      company,
+    bin:          document.getElementById('crm-bin').value.trim(),
+    status:       document.getElementById('crm-status').value,
+    contact:      document.getElementById('crm-contact').value.trim(),
+    position:     document.getElementById('crm-position').value.trim(),
+    phone:        document.getElementById('crm-phone').value.trim(),
+    email:        document.getElementById('crm-email').value.trim(),
+    address:      document.getElementById('crm-address').value.trim(),
+    deal_amount:  parseFloat(document.getElementById('crm-deal-amount').value) || 0,
+    notes:        document.getElementById('crm-notes').value.trim(),
+  };
+  if (id) {
+    var idx = crm_clients.findIndex(function(c){ return c.id===id; });
+    if (idx>=0) crm_clients[idx] = client; else crm_clients.unshift(client);
+  } else {
+    crm_clients.unshift(client);
+  }
+  crmSaveLocal();
+  crmFilter();
+  crmUpdateStats();
+  crmCloseModal();
+  showBinToast((id ? '✅ Клиент обновлён: ' : '✅ Клиент добавлен: ') + company, 'success');
+}
+
+function crmDeleteClient(id) {
+  var c = crm_clients.find(function(c){ return c.id===id; });
+  if (!c || !confirm('Удалить клиента «' + c.company + '»?')) return;
+  crm_clients = crm_clients.filter(function(c){ return c.id!==id; });
+  crmSaveLocal();
+  crmFilter();
+  crmUpdateStats();
+  showBinToast('🗑 Клиент удалён', 'success');
+}
+
+function crmSetStatus(btn, status) {
+  crm_statusFilter = status;
+  document.querySelectorAll('.crm-sf-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  crmFilter();
+}
+
+function crmFilter() {
+  var q = (document.getElementById('crm-search') || {value:''}).value.toLowerCase().trim();
+  crm_filtered = crm_clients.filter(function(c) {
+    if (crm_statusFilter && c.status !== crm_statusFilter) return false;
+    if (q) {
+      var hay = (c.company+' '+c.contact+' '+c.phone+' '+c.email+' '+c.bin+' '+c.notes).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+  crmRenderTable();
+}
+
+function crmRenderTable() {
+  var tbody = document.getElementById('crm-tbody');
+  if (!tbody) return;
+  if (!crm_filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="6" class="crm-empty">📭 Клиентов нет<br><small>Нажмите «+ Добавить клиента»</small></td></tr>';
+    return;
+  }
+  tbody.innerHTML = crm_filtered.map(function(c) {
+    var st  = CRM_STATUS[c.status] || CRM_STATUS.active;
+    var id  = c.id;
+    var amt = c.deal_amount > 0 ? '<br><small style="color:#39B2D1">' + Math.round(c.deal_amount).toLocaleString('ru-RU') + ' ₸</small>' : '';
+    return '<tr onclick="crmOpenModal(\'' + id + '\')" style="cursor:pointer">' +
+      '<td><b>' + escHtml(c.company) + '</b>' + (c.bin ? '<br><small style="color:#aaa">БИН: ' + escHtml(c.bin) + '</small>' : '') + amt + '</td>' +
+      '<td>' + escHtml(c.contact||'—') + (c.position ? '<br><small style="color:#aaa">' + escHtml(c.position) + '</small>' : '') + '</td>' +
+      '<td>' + escHtml(c.phone||'—') + (c.email ? '<br><small style="color:#aaa">' + escHtml(c.email) + '</small>' : '') + '</td>' +
+      '<td><span class="crm-status ' + st.cls + '">' + st.label + '</span></td>' +
+      '<td style="color:#aaa;font-size:12px">' + (c.last_contact||'—') + '</td>' +
+      '<td onclick="event.stopPropagation()">' +
+        '<div class="crm-actions">' +
+          '<button class="crm-act-btn crm-act-kp" onclick="crmFillKP(\'' + id + '\')">📄 КП</button>' +
+          '<button class="crm-act-btn crm-act-sc" onclick="crmFillSC(\'' + id + '\')">💰 Счёт</button>' +
+          '<button class="crm-act-btn crm-act-del" onclick="crmDeleteClient(\'' + id + '\')">🗑</button>' +
+        '</div>' +
+      '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+function crmUpdateStats() {
+  function cnt(s){ return s ? crm_clients.filter(function(c){ return c.status===s; }).length : crm_clients.length; }
+  function set(id,v){ var el=document.getElementById(id); if(el) el.textContent=v; }
+  set('crm-cnt-all',    cnt(''));
+  set('crm-cnt-active', cnt('active'));
+  set('crm-cnt-work',   cnt('work'));
+  set('crm-cnt-won',    cnt('won'));
+  set('crm-cnt-cold',   cnt('cold'));
+  set('crm-cnt-lost',   cnt('lost'));
+}
+
+function crmFillKP(id) {
+  var c = crm_clients.find(function(c){ return c.id===id; }); if(!c) return;
+  function sv(elId,val){ var el=document.getElementById(elId); if(el&&val) el.value=val; }
+  sv('kp__client_company', c.company); sv('kp__client_bin', c.bin);
+  if(typeof kpSave==='function') kpSave();
+  showTopPanel('kp', document.querySelectorAll('.tab-btn')[0]);
+  document.querySelectorAll('.tab-btn')[0].classList.add('active');
+  showBinToast('✅ КП заполнен: ' + c.company, 'success');
+}
+
+function crmFillSC(id) {
+  var c = crm_clients.find(function(c){ return c.id===id; }); if(!c) return;
+  function sv(elId,val){ var el=document.getElementById(elId); if(el&&val) el.value=val; }
+  sv('sc__client_company', c.company); sv('sc__client_bin', c.bin); sv('sc__client_address', c.address);
+  if(typeof scSave==='function') scSave();
+  showTopPanel('sc', document.querySelectorAll('.tab-btn')[1]);
+  document.querySelectorAll('.tab-btn')[1].classList.add('active');
+  showBinToast('✅ Счёт заполнен: ' + c.company, 'success');
+}
+
+function crmExportExcel() {
+  if (typeof XLSX==='undefined') { showBinToast('❌ XLSX не загружен','warn'); return; }
+  if (!crm_clients.length) { showBinToast('⚠️ Нет клиентов для экспорта','warn'); return; }
+  var statusMap = { active:'Активный', work:'В работе', won:'Сделка', cold:'Холодный', lost:'Отказ' };
+  var rows = [['Компания','БИН','Статус','Контакт','Должность','Телефон','Email','Адрес','Сумма ₸','Последнее касание','Примечания']];
+  crm_clients.forEach(function(c) {
+    rows.push([c.company||'',c.bin||'',statusMap[c.status]||'',c.contact||'',c.position||'',
+               c.phone||'',c.email||'',c.address||'',c.deal_amount||0,c.last_contact||'',c.notes||'']);
+  });
+  var ws1 = XLSX.utils.aoa_to_sheet(rows);
+  ws1['!cols'] = [30,14,12,20,18,16,24,30,14,14,30].map(function(w){ return {wch:w}; });
+
+  var total = crm_clients.reduce(function(s,c){ return s+(c.deal_amount||0); },0);
+  var sum2  = [['Статус','Количество','Сумма ₸']];
+  Object.keys(statusMap).forEach(function(k) {
+    var f = crm_clients.filter(function(c){ return c.status===k; });
+    sum2.push([statusMap[k], f.length, f.reduce(function(s,c){ return s+(c.deal_amount||0); },0)]);
+  });
+  sum2.push(['','','']); sum2.push(['ИТОГО', crm_clients.length, total]);
+  var ws2 = XLSX.utils.aoa_to_sheet(sum2);
+  ws2['!cols'] = [{wch:16},{wch:12},{wch:18}];
+
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws1, 'Клиенты');
+  XLSX.utils.book_append_sheet(wb, ws2, 'Сводка');
+  var date = new Date().toLocaleDateString('ru-RU').replace(/\./g,'-');
+  XLSX.writeFile(wb, 'CRM_' + date + '.xlsx');
+  showBinToast('✅ Excel выгружен: ' + crm_clients.length + ' клиентов', 'success');
+}
+
+function crmSaveLocal() {
+  try { localStorage.setItem('nemo_crm', JSON.stringify(crm_clients)); } catch(e){}
+}
+
+function crmLoadLocal() {
+  try {
+    var raw = localStorage.getItem('nemo_crm');
+    if (raw) crm_clients = JSON.parse(raw);
+    crmFilter();
+    crmUpdateStats();
+  } catch(e){}
+}
+
+crmLoadLocal();
 
 // ═══════════════════════════════════════════════════════════════
 // КАТАЛОГ ТОВАРОВ — парсинг прайсов и управление
@@ -3611,195 +4011,20 @@ function catGetRate() {
   return el ? (parseFloat(el.value) || 480) : 480;
 }
 
-// ── Курс НБК — автоматическое обновление ─────────────────────
-function nbkFetchRate() {
-  var btn  = document.getElementById('nbk-rate-btn');
-  var info = document.getElementById('nbk-rate-info');
-  if (btn)  { btn.textContent = '⏳'; btn.disabled = true; }
-  if (info) info.textContent = 'Запрашиваю...';
-
-  // Источники: только Национальный Банк Казахстана
-  nbkTrySource(0);
-}
-
-var NBK_SOURCES = [
-  // 1. Читаем из GitHub репо (туда кладёт GitHub Actions каждые 30 мин)
-  {
-    name: 'GitHub репо (НБК)',
-    type: 'repo',
-    fetch: function() {
-      var c = ghCfg();
-      if (!c.token) return Promise.reject(new Error('Нет токена'));
-      var url = 'https://api.github.com/repos/' + c.owner + '/' + c.repo + '/contents/cloud-data/nbk_rate.json';
-      return fetch(url, { headers: { 'Authorization': 'token ' + c.token, 'Accept': 'application/vnd.github.v3+json' } })
-        .then(function(r) { return r.ok ? r.json() : Promise.reject(r.status); })
-        .then(function(f) {
-          var d = JSON.parse(decodeURIComponent(escape(atob(f.content.replace(/\s/g,'')))));
-          return d.rate_kzt ? { rate: d.rate_kzt, date: d.updated_at } : null;
-        });
-    }
-  },
-  // 2. Парсим RSS НБК напрямую из браузера
-  {
-    name: 'НБК RSS',
-    type: 'xml',
-    url: 'https://nationalbank.kz/rss/rates_all.xml',
-    parse: function(xml) {
-      var items = xml.querySelectorAll('item');
-      for (var i = 0; i < items.length; i++) {
-        var idx = items[i].querySelector('index');
-        if (idx && idx.textContent.trim() === 'USD') {
-          // Ищем числовое значение в дочерних тегах
-          var children = items[i].children;
-          for (var j = 0; j < children.length; j++) {
-            var num = parseFloat(children[j].textContent.replace(/[^\d.]/g,''));
-            if (num > 100 && num < 1000) return num;
-          }
-        }
-        // Fallback: ищем в title "1 USD = 487.35 KZT"
-        var t = items[i].querySelector('title');
-        if (t && t.textContent.includes('USD')) {
-          var m = t.textContent.match(/=\s*([\d.,]+)/);
-          if (m) { var v = parseFloat(m[1].replace(',','.')); if (v > 100) return v; }
-        }
-      }
-      return null;
-    }
-  },
-  // 3. Open Data API НБК
-  {
-    name: 'НБК Open Data',
-    type: 'json',
-    url: 'https://data.nationalbank.kz/api/v1/rates?currencyId=USD&language=ru',
-    parse: function(d) {
-      var arr = d.rates || d.data || d.items || [];
-      for (var i = 0; i < arr.length; i++) {
-        var cur = (arr[i].currency || arr[i].currencyId || '').toUpperCase();
-        if (cur === 'USD') {
-          var v = parseFloat(arr[i].rateToTenge || arr[i].rate || arr[i].value);
-          if (v > 100) return v;
-        }
-      }
-      return null;
-    }
-  }
-];
-
-function nbkTrySource(idx) {
-  if (idx >= NBK_SOURCES.length) {
-    nbkRateError('НБК недоступен — введите курс вручную');
-    return;
-  }
-  var src = NBK_SOURCES[idx];
-  var info = document.getElementById('nbk-rate-info');
-  if (info) info.textContent = '⏳ ' + src.name + '...';
-
-  // Источник 1: GitHub репо
-  if (src.type === 'repo') {
-    src.fetch()
-      .then(function(result) {
-        if (result && result.rate > 100) nbkRateSuccess(result.rate, src.name, result.date);
-        else nbkTrySource(idx + 1);
-      })
-      .catch(function() { nbkTrySource(idx + 1); });
-    return;
-  }
-
-  // Источник 2: XML (RSS)
-  if (src.type === 'xml') {
-    fetch(src.url, { mode: 'cors' })
-      .then(function(r) { return r.ok ? r.text() : Promise.reject(r.status); })
-      .then(function(text) {
-        var xml  = new DOMParser().parseFromString(text, 'text/xml');
-        var rate = src.parse(xml);
-        if (rate && rate > 100) nbkRateSuccess(rate, src.name);
-        else nbkTrySource(idx + 1);
-      })
-      .catch(function() { nbkTrySource(idx + 1); });
-    return;
-  }
-
-  // Источник 3: JSON API
-  fetch(src.url, { mode: 'cors' })
-    .then(function(r) { return r.ok ? r.json() : Promise.reject(r.status); })
-    .then(function(data) {
-      var rate = src.parse(data);
-      if (rate && rate > 100) nbkRateSuccess(rate, src.name);
-      else nbkTrySource(idx + 1);
-    })
-    .catch(function() { nbkTrySource(idx + 1); });
-}
-
-function nbkRateSuccess(rate, sourceName, existingDate) {
-  rate = Math.round(rate * 100) / 100;
-  var el = document.getElementById('cat-usd-rate');
-  if (el) { el.value = rate; catApplyRate(); }
-
-  var now = existingDate || new Date().toLocaleString('ru-RU', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
-  localStorage.setItem('nbk_usd_rate', rate);
-  localStorage.setItem('nbk_usd_date', now);
-  localStorage.setItem('nbk_usd_source', sourceName);
-
-  var btn  = document.getElementById('nbk-rate-btn');
-  var info = document.getElementById('nbk-rate-info');
-  if (btn)  { btn.textContent = '🔄 Курс НБК'; btn.disabled = false; }
-  if (info) info.textContent = rate + ' ₸ · ' + now;
-
-  showBinToast('✅ Курс НБК USD/KZT: ' + rate + ' ₸', 'success');
-}
-
-function nbkRateError(msg) {
-  var btn  = document.getElementById('nbk-rate-btn');
-  var info = document.getElementById('nbk-rate-info');
-  if (btn)  { btn.textContent = '🔄 Курс НБК'; btn.disabled = false; }
-  if (info) info.textContent = '❌ НБК недоступен — введите курс вручную';
-  showBinToast('❌ НБК недоступен. Введите курс USD/KZT вручную', 'warn');
-}
-
-// Восстановить сохранённый курс при загрузке
-(function() {
-  var rate   = localStorage.getItem('nbk_usd_rate');
-  var date   = localStorage.getItem('nbk_usd_date');
-  var source = localStorage.getItem('nbk_usd_source');
-  if (rate) {
-    var el = document.getElementById('cat-usd-rate');
-    if (el) el.value = rate;
-    var info = document.getElementById('nbk-rate-info');
-    if (info && date) info.textContent = rate + ' ₸ · ' + date + (source ? ' · ' + source : '');
-  }
-  // Тихо обновляем курс при каждом открытии (без уведомления)
-  setTimeout(function() {
-    var saved = localStorage.getItem('nbk_usd_date');
-    var today = new Date().toLocaleDateString('ru-RU');
-    if (!saved || !saved.includes(today.slice(0,5))) {
-      // Курс устарел — обновляем тихо
-      nbkFetchRate();
-    }
-  }, 1500);
-})();
-
 function catApplyRate() {
-  cat_items.forEach(function(it) {
-    if (it.currency === 'USD') it.price_kzt = it.price * catGetRate();
-  });
+  var rate = catGetRate();
+  cat_items.forEach(function(it) { if (it.currency === 'USD') it.price_kzt = it.price * rate; });
+  localStorage.setItem('nemo_usd_rate', rate);
   catFilter();
 }
 
-function catFmtPrice(it) {
-  if (it.currency === 'USD') {
-    return '<span class="cat-price-usd">$' + it.price.toLocaleString('ru-RU', {maximumFractionDigits:0}) + ' ≈ </span>' +
-           '<span class="cat-price">' + Math.round(it.price_kzt).toLocaleString('ru-RU') + ' ₸</span>';
-  }
-  return '<span class="cat-price">' + Math.round(it.price_kzt).toLocaleString('ru-RU') + ' ₸</span>';
-}
-
-// ── Фильтрация и сортировка ───────────────────────────────────
+// ── Фильтрация и сортировка ──────────────────────────────────
 function catFilter() {
-  var q          = (document.getElementById('cat-search').value || '').toLowerCase().trim();
-  var supplierF  = document.getElementById('cat-supplier-filter').value;
-  var catF       = document.getElementById('cat-cat-filter').value;
-  var vendorF    = document.getElementById('cat-vendor-filter').value;
-  var currF      = document.getElementById('cat-currency-filter').value;
+  var q         = (document.getElementById('cat-search').value || '').toLowerCase().trim();
+  var supplierF = (document.getElementById('cat-supplier-filter') || {}).value || '';
+  var catF      = (document.getElementById('cat-cat-filter') || {}).value || '';
+  var vendorF   = (document.getElementById('cat-vendor-filter') || {}).value || '';
+  var currF     = (document.getElementById('cat-currency-filter') || {}).value || '';
 
   cat_filtered = cat_items.filter(function(it) {
     if (supplierF && it._src !== supplierF) return false;
@@ -3815,6 +4040,12 @@ function catFilter() {
 
   cat_filtered.sort(function(a, b) {
     var av = a[cat_sortField] || '', bv = b[cat_sortField] || '';
+    if (cat_sortField === '_supplierName') {
+      var af = cat_loadedFiles.find(function(f){ return f.name === a._src; });
+      var bf = cat_loadedFiles.find(function(f){ return f.name === b._src; });
+      av = (af && af.supplierName) || a._src || '';
+      bv = (bf && bf.supplierName) || b._src || '';
+    }
     if (typeof av === 'number') return cat_sortAsc ? av - bv : bv - av;
     av = String(av).toLowerCase(); bv = String(bv).toLowerCase();
     return cat_sortAsc ? av.localeCompare(bv, 'ru') : bv.localeCompare(av, 'ru');
@@ -3825,144 +4056,19 @@ function catFilter() {
   catUpdateStats();
 }
 
-function catBuildFilters() {
-  // Поставщики (по прайсам)
-  var supplierSel  = document.getElementById('cat-supplier-filter');
-  var prevSupplier = supplierSel ? supplierSel.value : '';
-  var supplierOpts = cat_loadedFiles.map(function(f) {
-    var label = escHtml((f.supplierName || f.name).slice(0, 50));
-    var sel   = f.name === prevSupplier ? ' selected' : '';
-    return '<option value="' + escHtml(f.name) + '"' + sel + '>' + label + ' (' + f.count.toLocaleString('ru-RU') + ')</option>';
-  }).join('');
-  if (supplierSel) supplierSel.innerHTML = '<option value="">Все прайсы (' + cat_loadedFiles.length + ')</option>' + supplierOpts;
-
-  // Категории
-  var cats   = [...new Set(cat_items.map(function(it){ return it.category; }).filter(Boolean))].sort(function(a,b){ return a.localeCompare(b,'ru'); });
-  var catSel = document.getElementById('cat-cat-filter');
-  var prevCat = catSel ? catSel.value : '';
-  if (catSel) catSel.innerHTML = '<option value="">Все категории (' + cats.length + ')</option>' +
-    cats.map(function(c){ return '<option value="' + escHtml(c) + '"' + (c===prevCat?' selected':'') + '>' + escHtml(c.slice(0,60)) + '</option>'; }).join('');
-
-  // Вендоры/бренды
-  var vendors   = [...new Set(cat_items.map(function(it){ return it.vendor; }).filter(Boolean))].sort(function(a,b){ return a.localeCompare(b,'ru'); });
-  var vendorSel = document.getElementById('cat-vendor-filter');
-  var prevVendor = vendorSel ? vendorSel.value : '';
-  if (vendorSel) vendorSel.innerHTML = '<option value="">Все бренды (' + vendors.length + ')</option>' +
-    vendors.map(function(v){ return '<option value="' + escHtml(v) + '"' + (v===prevVendor?' selected':'') + '>' + escHtml(v) + '</option>'; }).join('');
-}
-
-function catUpdateStats() {
-  var total    = cat_items.length;
-  var suppliers = cat_loadedFiles.length;
-  var filtered = cat_filtered.length;
-  var el;
-  el = document.getElementById('cat-total-count');    if (el) el.textContent = total.toLocaleString('ru-RU');
-  el = document.getElementById('cat-vendor-count');   if (el) el.textContent = suppliers;
-  el = document.getElementById('cat-filtered-count'); if (el) el.textContent = filtered.toLocaleString('ru-RU');
-}
-
-// ── Автоматическое имя поставщика из имени файла ─────────────
-function catCleanSupplierName(filename) {
-  // Убираем расширение
-  var name = filename.replace(/\.[^.]+$/, '');
-  // Убираем даты и номера: _14_04_2026, _2026_04_01, __1_, _v2_ и т.д.
-  name = name.replace(/[_\s]+\d{2}[_\s]\d{2}[_\s]\d{4}.*/g, '');
-  name = name.replace(/[_\s]+\d{4}[_\s]\d{2}[_\s]\d{2}.*/g, '');
-  name = name.replace(/[_\s]+\d+[_\s]*$/g, '');
-  name = name.replace(/[_]+/g, ' ').trim();
-  // Если "Stock" в имени — убираем
-  name = name.replace(/\s+(Stock|Price|Прайс|price)\s*$/i, '').trim();
-  return name || filename;
-}
-
-// ── Отрисовка загруженных прайсов (с редактированием имени) ──
-function catRenderFiles() {
-  var el = document.getElementById('cat-files-list');
-  if (!el) return;
-  el.innerHTML = '';
-  cat_loadedFiles.forEach(function(f) {
-    var tag = document.createElement('div');
-    tag.className = 'cat-file-tag';
-    tag.dataset.src = f.name;
-
-    var nameSpan = document.createElement('span');
-    nameSpan.className = 'cat-supplier-name';
-    nameSpan.title = 'Нажмите чтобы переименовать';
-    nameSpan.textContent = f.supplierName || f.name;
-    nameSpan.onclick = function() { catStartRename(f.name, tag, nameSpan); };
-
-    var countSpan = document.createElement('span');
-    countSpan.style.cssText = 'color:#39B2D1;font-size:11px';
-    countSpan.textContent = '(' + f.count.toLocaleString('ru-RU') + ')';
-
-    var delBtn = document.createElement('button');
-    delBtn.title = 'Удалить прайс';
-    delBtn.textContent = '×';
-    delBtn.onclick = function() { catRemoveFile(f.name); };
-
-    tag.appendChild(nameSpan);
-    tag.appendChild(countSpan);
-    tag.appendChild(delBtn);
-    el.appendChild(tag);
-  });
-}
-
-// ── Переименование поставщика инлайн ─────────────────────────
-function catStartRename(srcName, tag, nameSpan) {
-  var f = cat_loadedFiles.find(function(f){ return f.name === srcName; });
-  if (!f) return;
-
-  var input = document.createElement('input');
-  input.className = 'cat-supplier-input';
-  input.value = f.supplierName || f.name;
-  input.maxLength = 60;
-
-  tag.replaceChild(input, nameSpan);
-  input.focus();
-  input.select();
-
-  function save() {
-    var newName = input.value.trim() || f.name;
-    f.supplierName = newName;
-    // Обновляем во всех items
-    cat_items.forEach(function(it){ if (it._src === srcName) it._supplierName = newName; });
-    catSaveLocal();
-    catBuildFilters();
-    catRenderFiles();
-    showBinToast('✅ Переименован: «' + newName + '»', 'success');
-  }
-
-  input.addEventListener('blur',  save);
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter')  { input.blur(); }
-    if (e.key === 'Escape') { input.value = f.supplierName || f.name; input.blur(); }
-  });
-}
-
-function catRemoveFile(name) {
-  cat_items       = cat_items.filter(function(it){ return it._src !== name; });
-  cat_loadedFiles = cat_loadedFiles.filter(function(f){ return f.name !== name; });
-  catSaveLocal();
-  catBuildFilters();
-  catFilter();
-  catUpdateStats();
-  catRenderFiles();
-  var label = (cat_loadedFiles.find(function(f){ return f.name === name; }) || {}).supplierName || name;
-  showBinToast('🗑 Прайс удалён', 'success');
-}
-
 function catSort(field) {
   if (cat_sortField === field) cat_sortAsc = !cat_sortAsc;
   else { cat_sortField = field; cat_sortAsc = true; }
   catFilter();
 }
 
+// ── Рендер таблицы ───────────────────────────────────────────
 function catRenderTable() {
   var tbody = document.getElementById('cat-tbody');
   if (!tbody) return;
 
   if (!cat_filtered.length) {
-    tbody.innerHTML = '<tr><td colspan="7" class="cat-empty">😕 Ничего не найдено<br><small>Попробуйте изменить фильтры или загрузить прайс</small></td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" class="cat-empty">😕 Ничего не найдено<br><small>Попробуйте изменить фильтры или загрузите прайс</small></td></tr>';
     document.getElementById('cat-pagination').innerHTML = '';
     return;
   }
@@ -3975,17 +4081,16 @@ function catRenderTable() {
     var qtyHtml = it.qty > 0
       ? '<span class="cat-qty">' + Math.round(it.qty) + ' шт.</span>'
       : '<span class="cat-qty-zero">нет</span>';
+    var fileInfo = cat_loadedFiles.find(function(f){ return f.name === it._src; }) || {};
+    var supplierName = fileInfo.supplierName || it._src || '—';
     return '<tr>' +
-      '<td><span style="font-size:11px;color:#888">' + escHtml(it.category.slice(0,40)) + '</span></td>' +
-      '<td style="white-space:nowrap">' + escHtml(it.vendor || '—') + '</td>' +
+      '<td style="white-space:nowrap;font-weight:600;color:#39B2D1;font-size:12px">' + escHtml(supplierName.slice(0,25)) + '</td>' +
+      '<td style="white-space:nowrap;font-size:12px">' + escHtml(it.vendor || '—') + '</td>' +
+      '<td><span style="font-size:11px;color:#888">' + escHtml((it.category || '').slice(0,35)) + '</span></td>' +
       '<td class="cat-article">' + escHtml(it.article || '—') + '</td>' +
       '<td><div class="cat-name" title="' + escHtml(it.name) + '">' + escHtml(it.name) + '</div></td>' +
       '<td style="text-align:right;white-space:nowrap">' + catFmtPrice(it) + '</td>' +
       '<td style="text-align:center">' + qtyHtml + '</td>' +
-      '<td style="text-align:center;white-space:nowrap">' +
-        '<button class="cat-add-kp" onclick="catAddToKP(' + JSON.stringify(it).replace(/'/g,"&#39;") + ')">+ КП</button> ' +
-        '<button class="cat-add-sc" onclick="catAddToSC(' + JSON.stringify(it).replace(/'/g,"&#39;") + ')">+ Счёт</button>' +
-      '</td>' +
     '</tr>';
   }).join('');
 
@@ -3993,122 +4098,172 @@ function catRenderTable() {
 }
 
 function catRenderPagination() {
-  var total  = Math.ceil(cat_filtered.length / cat_PAGE);
-  var pg     = document.getElementById('cat-pagination');
-  if (total <= 1) { pg.innerHTML = ''; return; }
-
-  var html   = '';
-  var start  = Math.max(0, cat_page - 3);
-  var end    = Math.min(total - 1, cat_page + 3);
-
-  if (cat_page > 0)    html += '<button class="cat-page-btn" onclick="catGoPage(' + (cat_page-1) + ')">← Пред</button>';
-  if (start > 0)       html += '<button class="cat-page-btn" onclick="catGoPage(0)">1</button><span>…</span>';
-  for (var i = start; i <= end; i++) {
-    html += '<button class="cat-page-btn' + (i === cat_page ? ' active' : '') + '" onclick="catGoPage(' + i + ')">' + (i+1) + '</button>';
-  }
-  if (end < total - 1) html += '<span>…</span><button class="cat-page-btn" onclick="catGoPage(' + (total-1) + ')">' + total + '</button>';
-  if (cat_page < total - 1) html += '<button class="cat-page-btn" onclick="catGoPage(' + (cat_page+1) + ')">След →</button>';
-
+  var total = Math.ceil(cat_filtered.length / cat_PAGE);
+  var pg    = document.getElementById('cat-pagination');
+  if (!pg || total <= 1) { if (pg) pg.innerHTML = ''; return; }
+  var html  = '';
+  var s = Math.max(0, cat_page - 3), e = Math.min(total - 1, cat_page + 3);
+  if (cat_page > 0) html += '<button class="cat-page-btn" onclick="catGoPage(' + (cat_page-1) + ')">← Пред</button>';
+  if (s > 0)        html += '<button class="cat-page-btn" onclick="catGoPage(0)">1</button><span>…</span>';
+  for (var i = s; i <= e; i++)
+    html += '<button class="cat-page-btn' + (i===cat_page?' active':'') + '" onclick="catGoPage(' + i + ')">' + (i+1) + '</button>';
+  if (e < total-1)       html += '<span>…</span><button class="cat-page-btn" onclick="catGoPage(' + (total-1) + ')">' + total + '</button>';
+  if (cat_page < total-1) html += '<button class="cat-page-btn" onclick="catGoPage(' + (cat_page+1) + ')">След →</button>';
   pg.innerHTML = html;
 }
 
 function catGoPage(n) {
   cat_page = n;
   catRenderTable();
-  document.getElementById('panel-cat').scrollTo(0, 0);
+  var panel = document.getElementById('panel-cat');
+  if (panel) panel.scrollTo(0, 0);
 }
 
-// ── Добавить в КП / Счёт ─────────────────────────────────────
-function catAddToKP(item) {
-  if (typeof kp_items === 'undefined') { showBinToast('⚠️ Откройте вкладку КП', 'warn'); return; }
-  kp_items.push({ id: ++kp_itemId, name: item.name, model: item.article || '', qty: 1, price: Math.round(item.price_kzt) });
-  if (typeof renderItems === 'function') renderItems();
-  if (typeof kpSave === 'function') kpSave();
-  showBinToast('✅ Добавлено в КП: ' + item.name.slice(0,50), 'success');
-}
-
-function catAddToSC(item) {
-  if (typeof sc_items === 'undefined') { showBinToast('⚠️ Откройте вкладку Счёт', 'warn'); return; }
-  sc_items.push({ id: ++sc_itemId, name: item.name, unit: 'шт.', qty: 1, price: Math.round(item.price_kzt) });
-  if (typeof sc_renderItems === 'function') sc_renderItems();
-  if (typeof scSave === 'function') scSave();
-  showBinToast('✅ Добавлено в Счёт: ' + item.name.slice(0,50), 'success');
-}
-
-// ── Обновить фильтры и счётчики ───────────────────────────────
+// ── Фильтры и статистика ─────────────────────────────────────
 function catBuildFilters() {
-  var cats    = [...new Set(cat_items.map(function(it){ return it.category; }).filter(Boolean))].sort(function(a,b){ return a.localeCompare(b,'ru'); });
-  var vendors = [...new Set(cat_items.map(function(it){ return it.vendor; }).filter(Boolean))].sort(function(a,b){ return a.localeCompare(b,'ru'); });
+  var supplierSel = document.getElementById('cat-supplier-filter');
+  var prevSup = supplierSel ? supplierSel.value : '';
+  if (supplierSel) supplierSel.innerHTML = '<option value="">Все прайсы (' + cat_loadedFiles.length + ')</option>' +
+    cat_loadedFiles.map(function(f) {
+      return '<option value="' + escHtml(f.name) + '"' + (f.name===prevSup?' selected':'') + '>' + escHtml(f.supplierName || f.name) + ' (' + f.count + ')</option>';
+    }).join('');
 
+  var cats = [...new Set(cat_items.map(function(it){ return it.category; }).filter(Boolean))].sort(function(a,b){ return a.localeCompare(b,'ru'); });
   var catSel = document.getElementById('cat-cat-filter');
-  var prevCat = catSel.value;
-  catSel.innerHTML = '<option value="">Все категории (' + cats.length + ')</option>' +
-    cats.map(function(c){ return '<option value="' + escHtml(c) + '"' + (c===prevCat?' selected':'') + '>' + escHtml(c.slice(0,60)) + '</option>'; }).join('');
+  var prevCat = catSel ? catSel.value : '';
+  if (catSel) catSel.innerHTML = '<option value="">Все категории (' + cats.length + ')</option>' +
+    cats.map(function(c){ return '<option value="' + escHtml(c) + '"' + (c===prevCat?' selected':'') + '>' + escHtml(c.slice(0,55)) + '</option>'; }).join('');
 
+  var vendors = [...new Set(cat_items.map(function(it){ return it.vendor; }).filter(Boolean))].sort(function(a,b){ return a.localeCompare(b,'ru'); });
   var vendorSel = document.getElementById('cat-vendor-filter');
-  var prevVendor = vendorSel.value;
-  vendorSel.innerHTML = '<option value="">Все вендоры (' + vendors.length + ')</option>' +
+  var prevVendor = vendorSel ? vendorSel.value : '';
+  if (vendorSel) vendorSel.innerHTML = '<option value="">Все бренды (' + vendors.length + ')</option>' +
     vendors.map(function(v){ return '<option value="' + escHtml(v) + '"' + (v===prevVendor?' selected':'') + '>' + escHtml(v) + '</option>'; }).join('');
 }
 
 function catUpdateStats() {
-  var total    = cat_items.length;
-  var vendors  = new Set(cat_items.map(function(it){ return it.vendor; })).size;
-  var filtered = cat_filtered.length;
-  var el;
-  el = document.getElementById('cat-total-count');    if (el) el.textContent = total.toLocaleString('ru-RU');
-  el = document.getElementById('cat-vendor-count');   if (el) el.textContent = vendors;
-  el = document.getElementById('cat-filtered-count'); if (el) el.textContent = filtered.toLocaleString('ru-RU');
+  function s(id, v){ var el=document.getElementById(id); if(el) el.textContent=v; }
+  s('cat-total-count',    cat_items.length.toLocaleString('ru-RU'));
+  s('cat-vendor-count',   cat_loadedFiles.length);
+  s('cat-filtered-count', cat_filtered.length.toLocaleString('ru-RU'));
 }
 
+// ── Файлы поставщиков ────────────────────────────────────────
 function catRenderFiles() {
   var el = document.getElementById('cat-files-list');
   if (!el) return;
-  el.innerHTML = cat_loadedFiles.map(function(f) {
-    return '<div class="cat-file-tag">📊 ' + escHtml(f.name) + ' <span style="color:#39B2D1">(' + f.count.toLocaleString('ru-RU') + ')</span>' +
-      '<button onclick="catRemoveFile(\'' + escHtml(f.name).replace(/'/g,"&#39;") + '\')" title="Удалить">×</button>' +
-    '</div>';
-  }).join('');
+  el.innerHTML = '';
+  cat_loadedFiles.forEach(function(f) {
+    var tag = document.createElement('div');
+    tag.className = 'cat-file-tag';
+    var nameSpan = document.createElement('span');
+    nameSpan.className = 'cat-supplier-name';
+    nameSpan.title = 'Нажмите чтобы переименовать';
+    nameSpan.textContent = f.supplierName || f.name;
+    nameSpan.onclick = function() { catStartRename(f.name, tag, nameSpan); };
+    var countSpan = document.createElement('span');
+    countSpan.style.cssText = 'color:#39B2D1;font-size:11px';
+    countSpan.textContent = '(' + f.count.toLocaleString('ru-RU') + ')';
+    var delBtn = document.createElement('button');
+    delBtn.title = 'Удалить'; delBtn.textContent = '×';
+    delBtn.onclick = function() { catRemoveFile(f.name); };
+    tag.appendChild(nameSpan); tag.appendChild(countSpan); tag.appendChild(delBtn);
+    el.appendChild(tag);
+  });
+}
+
+function catStartRename(srcName, tag, nameSpan) {
+  var f = cat_loadedFiles.find(function(f){ return f.name === srcName; });
+  if (!f) return;
+  var input = document.createElement('input');
+  input.className = 'cat-supplier-input';
+  input.value = f.supplierName || f.name;
+  input.maxLength = 60;
+  tag.replaceChild(input, nameSpan);
+  input.focus(); input.select();
+  function save() {
+    var newName = input.value.trim() || f.name;
+    f.supplierName = newName;
+    catSaveLocal(); catBuildFilters(); catRenderFiles();
+    showBinToast('✅ Переименован: «' + newName + '»', 'success');
+  }
+  input.addEventListener('blur', save);
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') input.blur();
+    if (e.key === 'Escape') { input.value = f.supplierName || f.name; input.blur(); }
+  });
+}
+
+function catCleanSupplierName(filename) {
+  var name = filename.replace(/\.[^.]+$/, '');
+  name = name.replace(/[_\s]+\d{2}[_\s]\d{2}[_\s]\d{4}.*/g, '');
+  name = name.replace(/[_\s]+\d{4}[_\s]\d{2}[_\s]\d{2}.*/g, '');
+  name = name.replace(/[_\s]+\d+[_\s]*$/g, '');
+  name = name.replace(/[_]+/g, ' ').trim();
+  name = name.replace(/\s+(Stock|Price|Прайс)\s*$/i, '').trim();
+  return name || filename;
 }
 
 function catRemoveFile(name) {
   cat_items       = cat_items.filter(function(it){ return it._src !== name; });
   cat_loadedFiles = cat_loadedFiles.filter(function(f){ return f.name !== name; });
-  catSaveLocal();
-  catBuildFilters();
-  catFilter();
-  catUpdateStats();
-  catRenderFiles();
-  showBinToast('🗑 Прайс «' + name + '» удалён из каталога', 'success');
+  catSaveLocal(); catBuildFilters(); catFilter(); catUpdateStats(); catRenderFiles();
+  showBinToast('🗑 Прайс удалён', 'success');
 }
 
 function catClearAll() {
-  if (!confirm('Очистить весь каталог? Это удалит все загруженные прайсы.')) return;
+  if (!confirm('Очистить весь каталог?')) return;
   cat_items = []; cat_filtered = []; cat_loadedFiles = []; cat_page = 0;
   catSaveLocal(); catBuildFilters(); catFilter(); catUpdateStats(); catRenderFiles();
 }
 
-// ── localStorage ──────────────────────────────────────────────
+// ── localStorage + GitHub облако ─────────────────────────────
 function catSaveLocal() {
   try { localStorage.setItem('nemo_catalog', JSON.stringify({ items: cat_items, files: cat_loadedFiles })); }
   catch(e) { console.warn('Catalog save:', e); }
+  catSaveToCloud();
 }
 
 function catLoadLocal() {
   try {
     var raw = localStorage.getItem('nemo_catalog');
-    if (!raw) return;
-    var d = JSON.parse(raw);
-    cat_items       = d.items || [];
-    cat_loadedFiles = d.files || [];
-    // Пересчитываем price_kzt по текущему курсу
-    var rate = catGetRate();
-    cat_items.forEach(function(it){ if (it.currency === 'USD') it.price_kzt = it.price * rate; });
+    if (raw) { var d = JSON.parse(raw); cat_items = d.items || []; cat_loadedFiles = d.files || []; }
+    var rate = localStorage.getItem('nemo_usd_rate');
+    if (rate) { var el = document.getElementById('cat-usd-rate'); if (el) el.value = rate; }
+    var rr = catGetRate();
+    cat_items.forEach(function(it){ if (it.currency === 'USD') it.price_kzt = it.price * rr; });
     catBuildFilters(); catFilter(); catUpdateStats(); catRenderFiles();
   } catch(e) {}
 }
 
-// ── Drag & drop ───────────────────────────────────────────────
+function catSaveToCloud() {
+  if (!ghCfg().token) return;
+  var data = { items: cat_items, files: cat_loadedFiles, saved_at: new Date().toISOString() };
+  var path = GH_PATH + '/catalog.json';
+  ghGetFile(path).then(function(file) {
+    return ghPutFile(path, data, '📦 Каталог обновлён', file ? file.sha : null);
+  }).catch(function(){});
+}
+
+function catLoadFromCloud() {
+  if (!ghCfg().token) { catLoadLocal(); return; }
+  var path = GH_PATH + '/catalog.json';
+  ghGetFile(path).then(function(file) {
+    if (!file) { catLoadLocal(); return; }
+    var d = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\s/g,'')))));
+    if (!d.items || !d.items.length) { catLoadLocal(); return; }
+    cat_items       = d.items;
+    cat_loadedFiles = d.files || [];
+    var rate = catGetRate();
+    cat_items.forEach(function(it){ if (it.currency === 'USD') it.price_kzt = it.price * rate; });
+    // Sync to localStorage
+    localStorage.setItem('nemo_catalog', JSON.stringify({ items: cat_items, files: cat_loadedFiles }));
+    catBuildFilters(); catFilter(); catUpdateStats(); catRenderFiles();
+    if (d.saved_at) showBinToast('📦 Каталог загружен из облака (' + d.items.length.toLocaleString('ru-RU') + ' товаров)', 'success');
+  }).catch(function(){ catLoadLocal(); });
+}
+
+// ── Drag & drop ──────────────────────────────────────────────
 (function(){
   var zone = document.getElementById('cat-upload-zone');
   if (!zone) return;
@@ -4120,297 +4275,11 @@ function catLoadLocal() {
   });
 })();
 
-// Загрузить из localStorage при старте
-catLoadLocal();
+// Загрузить при старте (сначала из облака, потом из localStorage)
+catLoadFromCloud();
 
-// ═══════════════════════════════════════════════════════════════
-// AL-STYLE — загрузка прайса из GitHub репозитория
-// ═══════════════════════════════════════════════════════════════
-
-function alStyleLoadFromRepo() {
-  var c = ghCfg();
-  if (!c.token) { showGhSettings(); showBinToast('⚙️ Настройте GitHub токен', 'warn'); return; }
-
-  alStyleSetStatus('⏳ Загружаю прайс из репозитория...', '#f5a623');
-
-  var url = 'https://api.github.com/repos/' + c.owner + '/' + c.repo + '/contents/cloud-data/alstyle.json';
-  fetch(url, {
-    headers: { 'Authorization': 'token ' + c.token, 'Accept': 'application/vnd.github.v3+json' }
-  })
-  .then(function(r) {
-    if (r.status === 404) throw new Error('Файл cloud-data/alstyle.json не найден. Запустите GitHub Actions вручную.');
-    if (!r.ok) throw new Error('GitHub API: ' + r.status);
-    return r.json();
-  })
-  .then(function(file) {
-    var content = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\s/g,'')))));
-    alStyleApplyData(content);
-  })
-  .catch(function(err) {
-    alStyleSetStatus('❌ ' + err.message, '#e24b4a');
-    showBinToast('❌ ' + err.message, 'warn');
-  });
-}
-
-function alStyleApplyData(content) {
-  var items = (content.items || []).map(function(it, i) {
-    var rate = catGetRate();
-    return {
-      _id:      'alstyle-' + i,
-      _src:     'Al-Style API',
-      article:  it.article  || '',
-      name:     it.name     || '',
-      category: it.category || '',
-      vendor:   it.vendor   || 'Al-Style',
-      price:    it.price    || 0,
-      currency: it.currency || 'KZT',
-      price_kzt: it.currency === 'USD' ? (it.price || 0) * rate : (it.price || 0),
-      qty:      it.qty      || 0,
-    };
-  }).filter(function(it) { return it.name && it.price_kzt > 0; });
-
-  // Заменяем старые данные Al-Style
-  cat_items = cat_items.filter(function(it) { return it._src !== 'Al-Style API'; });
-  var idx = cat_loadedFiles.findIndex(function(f) { return f.name === 'Al-Style API'; });
-  if (idx >= 0) cat_loadedFiles.splice(idx, 1);
-  cat_items = cat_items.concat(items);
-  cat_loadedFiles.push({ name: 'Al-Style API', count: items.length });
-
-  catSaveLocal();
-  catBuildFilters();
-  catFilter();
-  catUpdateStats();
-  catRenderFiles();
-
-  var updated = content.updated_at || '—';
-  localStorage.setItem('alstyle_last_sync', updated);
-  var el = document.getElementById('alstyle-last-sync');
-  if (el) el.textContent = '📅 Обновлён: ' + updated + ' (Алматы)  •  ' + items.length.toLocaleString('ru-RU') + ' товаров';
-
-  var msg = '✅ Al-Style: ' + items.length.toLocaleString('ru-RU') + ' товаров (обновлён ' + updated + ')';
-  alStyleSetStatus(msg, '#1a7a4a');
-  showBinToast(msg, 'success');
-}
-
-function alStyleSetStatus(msg, color) {
-  var el = document.getElementById('alstyle-status');
-  if (el) { el.textContent = msg; el.style.color = color || '#888'; }
-}
-
-// Авто-загрузка при открытии каталога
-function alStyleAutoLoad() {
-  var lastSync = localStorage.getItem('alstyle_last_sync');
-  var el = document.getElementById('alstyle-last-sync');
-  if (el && lastSync) el.textContent = '📅 Обновлён: ' + lastSync + ' (Алматы)';
-  // Подгружаем свежие данные тихо в фоне если настроен GitHub
-  if (ghCfg().token) {
-    var url = 'https://api.github.com/repos/' + ghCfg().owner + '/' + ghCfg().repo + '/contents/cloud-data/alstyle.json';
-    fetch(url, { headers: { 'Authorization': 'token ' + ghCfg().token, 'Accept': 'application/vnd.github.v3+json' } })
-      .then(function(r) { return r.ok ? r.json() : null; })
-      .then(function(file) {
-        if (!file) return;
-        var content = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\s/g,'')))));
-        // Обновляем только если данных нет или они старше часа
-        var hasCat = cat_items.some(function(it) { return it._src === 'Al-Style API'; });
-        if (!hasCat) alStyleApplyData(content);
-        else {
-          var el2 = document.getElementById('alstyle-last-sync');
-          if (el2 && content.updated_at) el2.textContent = '📅 Обновлён: ' + content.updated_at + ' (Алматы)  •  ' + (content.count||0).toLocaleString('ru-RU') + ' товаров';
-        }
-      })
-      .catch(function(){});
-  }
-}
-alStyleAutoLoad();
-
-// ═══════════════════════════════════════════════════════════════
-// AL-STYLE API — синхронизация напрямую из браузера
-// ═══════════════════════════════════════════════════════════════
-
-function alStyleSaveSettings() {
-  var endpoint = document.getElementById('alstyle-endpoint').value.trim();
-  var token    = document.getElementById('alstyle-token').value.trim();
-  localStorage.setItem('alstyle_endpoint', endpoint);
-  localStorage.setItem('alstyle_token', token);
-  showBinToast('✅ Настройки Al-Style сохранены', 'success');
-}
-
-function alStyleLoadSettings() {
-  var ep = localStorage.getItem('alstyle_endpoint') || '';
-  var tk = localStorage.getItem('alstyle_token') || '';
-  var epEl = document.getElementById('alstyle-endpoint');
-  var tkEl = document.getElementById('alstyle-token');
-  if (epEl && ep) epEl.value = ep;
-  if (tkEl && tk) tkEl.value = tk;
-  // Показать дату последней синхронизации
-  var lastSync = localStorage.getItem('alstyle_last_sync');
-  var el = document.getElementById('alstyle-last-sync');
-  if (el && lastSync) el.textContent = '📅 Последняя синхронизация: ' + lastSync;
-}
-
-function alStyleSetStatus(msg, color) {
-  var el = document.getElementById('alstyle-status');
-  if (el) { el.textContent = msg; el.style.color = color || '#888'; }
-}
-
-function alStyleSync() {
-  var endpoint = document.getElementById('alstyle-endpoint').value.trim();
-  var token    = document.getElementById('alstyle-token').value.trim();
-
-  if (!token) { showBinToast('⚠️ Введите API токен', 'warn'); return; }
-
-  // Если endpoint не указан — пробуем типичные URL
-  var endpoints = endpoint ? [endpoint] : [
-    'https://b2b.al-style.kz/products',
-    'https://b2b.al-style.kz/catalog',
-    'https://b2b.al-style.kz/catalog/products',
-    'https://b2b.al-style.kz/price',
-    'https://b2b.al-style.kz/prices',
-    'https://api.al-style.kz/products',
-    'https://api.al-style.kz/catalog',
-    'https://api.al-style.kz/price',
-  ];
-
-  alStyleSaveSettings();
-  alStyleSetStatus('⏳ Подключаюсь к Al-Style...', '#f5a623');
-
-  alStyleTryEndpoints(endpoints, token, 0);
-}
-
-function alStyleTryEndpoints(endpoints, token, idx) {
-  if (idx >= endpoints.length) {
-    alStyleSetStatus('❌ Ни один endpoint не ответил. Проверьте URL в DevTools (F12 → Network)', '#e24b4a');
-    showBinToast('❌ Не удалось подключиться. Откройте F12 и найдите нужный URL', 'warn');
-    return;
-  }
-
-  var url = endpoints[idx];
-  alStyleSetStatus('⏳ Пробую: ' + url, '#f5a623');
-
-  // Пробуем разные способы передачи токена
-  var headers = {
-    'Accept': 'application/json',
-    'Authorization': 'Bearer ' + token,
-    'X-Api-Key': token,
-  };
-
-  fetch(url, { headers: headers, credentials: 'include' })
-    .then(function(r) {
-      if (!r.ok) {
-        console.log('[AlStyle] ' + url + ' → ' + r.status);
-        alStyleTryEndpoints(endpoints, token, idx + 1);
-        return null;
-      }
-      return r.json();
-    })
-    .then(function(data) {
-      if (!data) return;
-      alStyleProcessData(data, url, token);
-    })
-    .catch(function(err) {
-      console.log('[AlStyle] ' + url + ' → ' + err.message);
-      // CORS ошибка — пробуем следующий
-      if (err.message.includes('fetch') || err.message.includes('CORS') || err.message.includes('network')) {
-        alStyleTryEndpoints(endpoints, token, idx + 1);
-      } else {
-        alStyleSetStatus('❌ Ошибка: ' + err.message, '#e24b4a');
-      }
-    });
-}
-
-function alStyleProcessData(data, url, token) {
-  // Нормализуем ответ — разные API возвращают по-разному
-  var items = [];
-  if (Array.isArray(data))                   items = data;
-  else if (Array.isArray(data.items))        items = data.items;
-  else if (Array.isArray(data.products))     items = data.products;
-  else if (Array.isArray(data.data))         items = data.data;
-  else if (Array.isArray(data.catalog))      items = data.catalog;
-  else if (Array.isArray(data.goods))        items = data.goods;
-  else if (data.result && Array.isArray(data.result)) items = data.result;
-
-  if (!items.length) {
-    alStyleSetStatus('⚠️ Данные получены, но товары не найдены. Скиньте пример JSON — настроим парсер.', '#f5a623');
-    console.log('[AlStyle] Raw response:', JSON.stringify(data).slice(0, 500));
-    showBinToast('⚠️ Данные пришли но формат неизвестен. Открыйте консоль (F12) и скиньте JSON.', 'warn');
-    return;
-  }
-
-  // Парсим в унифицированный формат
-  var parsed = items.map(function(it, i) {
-    // Пытаемся угадать поля по типичным именам Al-Style/B2B API
-    var name  = it.name || it.title || it.product_name || it.наименование || it.Наименование || String(it.id || i);
-    var art   = it.article || it.sku || it.code || it.артикул || it.Артикул || it.vendor_code || '';
-    var price = parseFloat(it.price || it.price_kzt || it.цена || it.Цена || it.retail_price || 0);
-    var curr  = (it.currency || it.валюта || 'KZT').toUpperCase();
-    var qty   = parseFloat(it.quantity || it.qty || it.stock || it.остаток || it.Остаток || 0);
-    var cat   = it.category || it.category_name || it.категория || it.group || it.group_name || '';
-    var vendor = it.vendor || it.brand || it.производитель || it.Производитель || 'Al-Style';
-    return {
-      _id: 'alstyle-' + i,
-      _src: 'Al-Style API',
-      article:  String(art),
-      name:     String(name),
-      category: String(cat),
-      vendor:   String(vendor),
-      price:    price,
-      currency: curr,
-      price_kzt: curr === 'USD' ? price * catGetRate() : price,
-      qty:      qty,
-    };
-  }).filter(function(it) { return it.name && it.price > 0; });
-
-  // Убираем старые данные Al-Style, добавляем новые
-  cat_items = cat_items.filter(function(it) { return it._src !== 'Al-Style API'; });
-  var existing = cat_loadedFiles.findIndex(function(f) { return f.name === 'Al-Style API'; });
-  if (existing >= 0) cat_loadedFiles.splice(existing, 1);
-
-  cat_items = cat_items.concat(parsed);
-  cat_loadedFiles.push({ name: 'Al-Style API', count: parsed.length });
-
-  catSaveLocal();
-  catBuildFilters();
-  catFilter();
-  catUpdateStats();
-  catRenderFiles();
-
-  // Сохраняем настройки и время
-  localStorage.setItem('alstyle_endpoint', url);
-  localStorage.setItem('alstyle_last_sync',
-    new Date().toLocaleString('ru-RU', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' }));
-  alStyleLoadSettings();
-
-  var msg = '✅ Al-Style: загружено ' + parsed.length.toLocaleString('ru-RU') + ' товаров';
-  alStyleSetStatus(msg, '#1a7a4a');
-  showBinToast(msg, 'success');
-}
-
-// Восстановить настройки при загрузке
-alStyleLoadSettings();
-
-// ── Тема: светлая / тёмная ────────────────────────────────────
-function toggleTheme() {
-  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  setTheme(isDark ? 'light' : 'dark');
-}
-function setTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('nemo_theme', theme);
-  var btn = document.getElementById('theme-toggle-btn');
-  if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-}
-// Применить сохранённую тему при загрузке
-(function(){
-  var saved = localStorage.getItem('nemo_theme');
-  // Если не сохранено — проверяем системную тему
-  if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    saved = 'dark';
-  }
-  if (saved) setTheme(saved);
-})();
-
-// Инициализация
-ghUpdateStatusBtn();
+// ─────────────────────────────────────────────────────────────
+// GITHUB CLOUD HISTORY — синхронизация и история документов
 </script>
 
 <!-- ══════════════════════════════════════════════════════════
@@ -4419,20 +4288,6 @@ ghUpdateStatusBtn();
 <div id="panel-cat" class="sub-panel" style="display:none">
 <div class="cat-wrap">
   <h1>📦 Каталог товаров</h1>
-
-  <!-- Al-Style API синхронизация -->
-  <div class="section" style="border-left:4px solid #39B2D1;margin-bottom:1rem;padding:1rem 1.25rem">
-    <div class="section-title" style="color:#39B2D1;margin-bottom:.75rem">🔗 Al-Style — автоматический прайс</div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-      <button onclick="alStyleLoadFromRepo()" style="padding:9px 18px;background:#39B2D1;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:Arial;font-weight:600">🔄 Загрузить актуальный прайс</button>
-      <span id="alstyle-status" style="font-size:13px;color:#888"></span>
-    </div>
-    <div id="alstyle-last-sync" style="font-size:11px;color:#aaa;margin-top:6px"></div>
-    <div style="margin-top:8px;font-size:11px;color:#999;line-height:1.6">
-      GitHub Actions автоматически обновляет прайс каждые 30 минут •
-      При открытии программы данные подгружаются автоматически
-    </div>
-  </div>
 
   <!-- Загрузка прайсов -->
   <div class="cat-upload-zone" id="cat-upload-zone">
@@ -4454,8 +4309,7 @@ ghUpdateStatusBtn();
       <span style="font-size:12px;color:#f5a623">💱 USD/KZT:</span>
       <input class="cat-rate" id="cat-usd-rate" type="number" value="480" min="1" oninput="catApplyRate()" style="width:80px">
       <span style="font-size:12px;color:#888">₸</span>
-      <button onclick="nbkFetchRate()" id="nbk-rate-btn" style="padding:5px 10px;background:#1a5276;color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer;font-family:Arial;white-space:nowrap">🔄 Курс НБК</button>
-      <span id="nbk-rate-info" style="font-size:11px;color:#888"></span>
+      
     </div>
   </div>
 
@@ -4484,13 +4338,13 @@ ghUpdateStatusBtn();
     <table class="cat-table" id="cat-table">
       <thead>
         <tr>
-          <th onclick="catSort('category')">Категория ↕</th>
+          <th onclick="catSort('_supplierName')">Поставщик ↕</th>
           <th onclick="catSort('vendor')">Вендор ↕</th>
+          <th onclick="catSort('category')">Категория ↕</th>
           <th onclick="catSort('article')">Артикул ↕</th>
           <th onclick="catSort('name')" style="min-width:200px">Наименование ↕</th>
           <th onclick="catSort('price_kzt')" style="text-align:right">Цена ↕</th>
           <th onclick="catSort('qty')" style="text-align:center">Кол-во ↕</th>
-          <th style="text-align:center">Добавить</th>
         </tr>
       </thead>
       <tbody id="cat-tbody"></tbody>
@@ -4500,6 +4354,144 @@ ghUpdateStatusBtn();
   <!-- Пагинация -->
   <div class="cat-pagination" id="cat-pagination"></div>
 </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     PANEL 5: CRM — База клиентов
+     ══════════════════════════════════════════════════════════ -->
+      <!-- Связанные сделки -->
+      <div id="crm-modal-deals" style="display:none">
+        <div style="font-size:12px;font-weight:600;color:#666;margin-bottom:6px">📋 Документы клиента</div>
+        <div id="crm-modal-deals-list"></div>
+      </div>
+    </div>
+    <div class="crm-modal-foot">
+      <button onclick="crmCloseModal()" style="padding:9px 16px;background:#f5f5f5;border:1px solid #ddd;border-radius:8px;font-size:13px;cursor:pointer;font-family:Arial">Отмена</button>
+      <button onclick="crmSaveClient()" style="padding:9px 20px;background:#2ea043;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:Arial;font-weight:600">💾 Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     PANEL 5: CRM — КЛИЕНТСКАЯ БАЗА
+     ══════════════════════════════════════════════════════════ -->
+<div id="panel-crm" class="sub-panel" style="display:none">
+<div class="crm-wrap">
+  <h1>👥 CRM — Клиентская база</h1>
+
+  <!-- Статистика -->
+  <div class="crm-stats">
+    <div class="crm-stat"><b id="crm-cnt-all">0</b>Всего</div>
+    <div class="crm-stat"><b id="crm-cnt-active" style="color:#1a7a4a">0</b>Активных</div>
+    <div class="crm-stat"><b id="crm-cnt-work" style="color:#1a4a8a">0</b>В работе</div>
+    <div class="crm-stat"><b id="crm-cnt-won" style="color:#7a5200">0</b>Сделки</div>
+    <div class="crm-stat"><b id="crm-cnt-cold" style="color:#888">0</b>Холодных</div>
+    <div class="crm-stat"><b id="crm-cnt-lost" style="color:#c0392b">0</b>Отказов</div>
+  </div>
+
+  <!-- Панель инструментов -->
+  <div class="crm-toolbar">
+    <input class="crm-search" id="crm-search" type="text" placeholder="🔍 Поиск по компании, контакту, телефону..." oninput="crmFilter()">
+    <button class="crm-btn-add" onclick="crmOpenModal()">+ Добавить клиента</button>
+    <button class="crm-btn-excel" onclick="crmExportExcel()">📊 Выгрузить в Excel</button>
+  </div>
+
+  <!-- Фильтр по статусу -->
+  <div class="crm-status-filter">
+    <button class="crm-sf-btn active" data-status="" onclick="crmSetStatus(this,'')"
+      style="background:#f0f0f0;color:#444;border-color:#ccc">Все</button>
+    <button class="crm-sf-btn" data-status="active" onclick="crmSetStatus(this,'active')"
+      style="background:#d1f0dc;color:#1a7a4a;border-color:#2ea043">🟢 Активные</button>
+    <button class="crm-sf-btn" data-status="work" onclick="crmSetStatus(this,'work')"
+      style="background:#d6eaff;color:#1a4a8a;border-color:#3a80d2">🔵 В работе</button>
+    <button class="crm-sf-btn" data-status="won" onclick="crmSetStatus(this,'won')"
+      style="background:#fff3d4;color:#7a5200;border-color:#d4a017">🏆 Сделка</button>
+    <button class="crm-sf-btn" data-status="cold" onclick="crmSetStatus(this,'cold')"
+      style="background:#ebebeb;color:#555;border-color:#aaa">❄️ Холодные</button>
+    <button class="crm-sf-btn" data-status="lost" onclick="crmSetStatus(this,'lost')"
+      style="background:#fde8e8;color:#c0392b;border-color:#e24b4a">❌ Отказ</button>
+  </div>
+
+  <!-- Таблица клиентов -->
+  <div class="crm-table-wrap">
+    <table class="crm-table">
+      <thead>
+        <tr>
+          <th>Компания</th>
+          <th>Контакт</th>
+          <th>Телефон / Email</th>
+          <th>Статус</th>
+          <th>Последнее касание</th>
+          <th style="text-align:center">Действия</th>
+        </tr>
+      </thead>
+      <tbody id="crm-tbody"></tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- CRM — Модальное окно клиента -->
+<div class="crm-modal" id="crm-modal" onclick="if(event.target===this)crmCloseModal()">
+  <div class="crm-modal-box">
+    <div class="crm-modal-head">
+      <h3 id="crm-modal-title">Новый клиент</h3>
+      <button onclick="crmCloseModal()" style="background:none;border:none;font-size:22px;cursor:pointer;color:#aaa">×</button>
+    </div>
+    <div class="crm-modal-body">
+      <input type="hidden" id="crm-edit-id">
+      <div class="full">
+        <label>Название компании *</label>
+        <input id="crm-company" placeholder="ТОО «Компания»">
+      </div>
+      <div>
+        <label>БИН</label>
+        <input id="crm-bin" placeholder="123456789012" maxlength="12">
+      </div>
+      <div>
+        <label>Статус</label>
+        <select id="crm-status">
+          <option value="active">🟢 Активный</option>
+          <option value="work">🔵 В работе</option>
+          <option value="won">🏆 Сделка закрыта</option>
+          <option value="cold">❄️ Холодный</option>
+          <option value="lost">❌ Отказ</option>
+        </select>
+      </div>
+      <div>
+        <label>Контактное лицо</label>
+        <input id="crm-contact" placeholder="Иванов Иван Иванович">
+      </div>
+      <div>
+        <label>Должность</label>
+        <input id="crm-position" placeholder="Директор по закупкам">
+      </div>
+      <div>
+        <label>Телефон</label>
+        <input id="crm-phone" placeholder="+7 701 123 45 67" type="tel">
+      </div>
+      <div>
+        <label>Email</label>
+        <input id="crm-email" placeholder="email@company.kz" type="email">
+      </div>
+      <div class="full">
+        <label>Адрес</label>
+        <input id="crm-address" placeholder="г. Алматы, ул. Абая 1">
+      </div>
+      <div class="full">
+        <label>Сумма сделки (₸)</label>
+        <input id="crm-deal-amount" type="number" min="0" placeholder="0">
+      </div>
+      <div class="full">
+        <label>Примечания</label>
+        <textarea id="crm-notes" placeholder="Доп. информация о клиенте..."></textarea>
+      </div>
+    </div>
+    <div class="crm-modal-foot">
+      <button onclick="crmCloseModal()" style="padding:9px 18px;background:#f5f5f5;border:1px solid #ccc;border-radius:8px;font-size:13px;cursor:pointer;font-family:Arial">Отмена</button>
+      <button onclick="crmSaveClient()" style="padding:9px 20px;background:#2ea043;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:Arial;font-weight:600">💾 Сохранить</button>
+    </div>
+  </div>
 </div>
 
 <!-- ── GitHub Settings Modal ────────────────────────────────── -->
