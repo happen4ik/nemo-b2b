@@ -1,6 +1,71 @@
 {
   "docs": [
     {
+      "id": "sc-00000000224",
+      "title": "Счёт №00000000224 — ТОО \"УниСервисДорСтрой\"",
+      "created_at": "2026-05-14T05:20:43.690Z",
+      "updated_at": "2026-05-14T05:20:43.690Z",
+      "data": {
+        "client_company": "ТОО \"УниСервисДорСтрой\"",
+        "client_bin": "060340013706",
+        "client_address": "Республика Казахстан, г. Алматы, Медеуский район, улица Изима Искандерова, №4, 3 этаж",
+        "client_contract": "",
+        "inv_number": "00000000224",
+        "inv_date": "2026-05-14",
+        "items": [
+          {
+            "id": 1,
+            "name": "Мышь CANYON mouse MW-26 LCD Silent Dual Mode Wireless Green",
+            "qty": 10,
+            "unit": "шт.",
+            "price": 6720
+          },
+          {
+            "id": 2,
+            "name": "Цветное лазерное МФУ Canon imageRUNNER C3326I",
+            "qty": 1,
+            "unit": "шт.",
+            "price": 910273
+          },
+          {
+            "id": 3,
+            "name": "Ноутбук Firebat T6A-5R6616F8",
+            "qty": 10,
+            "unit": "шт.",
+            "price": 355649
+          },
+          {
+            "id": 4,
+            "name": "Тонер-картридж Canon C-EXV 65 CYAN для IR C3326 5762C001AA",
+            "qty": 1,
+            "unit": "шт.",
+            "price": 82585
+          },
+          {
+            "id": 5,
+            "name": "Тонер-картридж Canon C-EXV 65 Black для IR C3326i 5761C001AA",
+            "qty": 2,
+            "unit": "шт.",
+            "price": 50910
+          },
+          {
+            "id": 6,
+            "name": "Тонер-картридж Canon C-EXV 65 YELLOW для IR C3326 5764C001AA",
+            "qty": 1,
+            "unit": "шт.",
+            "price": 82585
+          },
+          {
+            "id": 7,
+            "name": "Тонер-картридж Canon C-EXV 65 MAGENTA для IR C3326 5763C001AA",
+            "qty": 1,
+            "unit": "шт.",
+            "price": 82585
+          }
+        ]
+      }
+    },
+    {
       "id": "sc-00000000236",
       "title": "Счёт №00000000236 — Zedazeni KZ (Зедазени КЗ)",
       "created_at": "2026-05-13T03:46:48.103Z",
